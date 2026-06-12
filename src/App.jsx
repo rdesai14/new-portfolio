@@ -11,8 +11,6 @@ import {
   ChevronRight,
   Sparkles,
   Zap,
-  Database,
-  Globe,
   Layers,
   GitBranch,
   Star,
