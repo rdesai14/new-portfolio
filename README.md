@@ -20,6 +20,12 @@ npm run dev
 
 Open [http://localhost:5173](http://localhost:5173) in your browser.
 
+## Live Site
+
+Deployed via GitHub Pages: [https://rdesai14.github.io/new-portfolio/](https://rdesai14.github.io/new-portfolio/)
+
+Pushes to `main` automatically rebuild and deploy through GitHub Actions.
+
 ## Build
 
 ```bash

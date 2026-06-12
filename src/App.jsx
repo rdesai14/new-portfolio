@@ -226,6 +226,20 @@ LinkedIn: ${PROFILE.linkedin}`,
   Terminal: portfolio-v2`,
 };
 
+const TERMINAL_ALIASES = {
+  'neo fetch': 'neofetch',
+  'who am i': 'whoami',
+};
+
+function resolveTerminalCommand(raw) {
+  const trimmed = raw.trim().toLowerCase().replace(/\s+/g, ' ');
+  if (TERMINAL_COMMANDS[trimmed]) return trimmed;
+  if (TERMINAL_ALIASES[trimmed]) return TERMINAL_ALIASES[trimmed];
+  const compact = trimmed.replace(/\s+/g, '');
+  if (TERMINAL_COMMANDS[compact]) return compact;
+  return null;
+}
+
 const BOOT_LINES = [
   'INITIALIZING NEURAL INTERFACE...',
   'LOADING GEORGIA TECH MODULES...',
@@ -1069,14 +1083,18 @@ function TerminalIDE({ visible }) {
       return;
     }
 
-    const handler = TERMINAL_COMMANDS[trimmed];
+    const resolved = resolveTerminalCommand(cmd);
+    const handler = resolved ? TERMINAL_COMMANDS[resolved] : null;
     if (handler) {
       const output = handler();
       setHistory((h) => [...h, { type: 'output', text: output }]);
     } else {
+      const hint = trimmed.replace(/\s+/g, '').includes('neo')
+        ? ' Did you mean "neofetch"?'
+        : '';
       setHistory((h) => [...h, {
         type: 'error',
-        text: `Command not found: ${trimmed}. Type "help" for available commands.`,
+        text: `Command not found: ${trimmed}.${hint} Type "help" for available commands.`,
       }]);
     }
     setIsRunning(false);
