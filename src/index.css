@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-white/5;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #B3A369 #001a33;
+  }
+
+  body {
+    @apply bg-navy-deep text-silver-bright antialiased overflow-x-hidden;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-navy-deep;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gold/40 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gold/70;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #E8D9A0 0%, #B3A369 50%, #D4C484 100%);
+  }
+
+  .glass {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/10;
+  }
+
+  .glass-gold {
+    @apply bg-gold/[0.04] backdrop-blur-xl border border-gold/20;
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 30px rgba(179, 163, 105, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .glow-gold-intense {
+    box-shadow: 0 0 40px rgba(179, 163, 105, 0.4), 0 0 80px rgba(179, 163, 105, 0.15), inset 0 0 30px rgba(179, 163, 105, 0.05);
+  }
+
+  .magnetic-hover {
+    @apply transition-all duration-500 ease-out-expo;
+  }
+
+  .magnetic-hover:hover {
+    @apply -translate-y-0.5;
+    box-shadow: 0 8px 30px rgba(179, 163, 105, 0.25);
+  }
+
+  .shatter-char {
+    display: inline-block;
+    animation: shatterIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  @keyframes shatterIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-40px) rotateX(90deg) scale(0.5);
+      filter: blur(8px);
+    }
+    60% {
+      opacity: 1;
+      filter: blur(0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) rotateX(0deg) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(179, 163, 105, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(179, 163, 105, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .noise-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  .terminal-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .terminal-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gold/30 rounded-full;
+  }
+}
