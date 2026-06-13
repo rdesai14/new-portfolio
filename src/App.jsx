@@ -326,10 +326,14 @@ const TERMINAL_COMMANDS = {
   experience — Work & research history
   projects   — Project portfolio
   contact    — Contact information
+  certs      — Professional certifications
   clear      — Clear terminal
   whoami     — Identity check
   neofetch   — System info banner
-  certs      — Professional certifications`,
+  rules      — How to use this terminal
+
+Type "rules" for navigation tips.`,
+  rules: () => TERMINAL_GUIDE,
   about: () => `${PROFILE.name}
 ${PROFILE.subtitle}
 ${PROFILE.tagline}
@@ -375,6 +379,24 @@ const TERMINAL_ALIASES = {
   'neo fetch': 'neofetch',
   'who am i': 'whoami',
 };
+
+const TERMINAL_GUIDE = `Navigation
+  · Click the terminal panel to focus the input line
+  · Type a command and press Enter to run it
+  · ↑ / ↓ recall previous commands (like zsh history)
+  · Tab bar switches Terminal ↔ Editor views
+
+Getting started
+  · help       — list all resume commands
+  · rules      — show this guide again
+  · about      — quick intro, then try projects or experience
+  · neofetch   — system-style profile banner (one word, no space)
+
+Tips
+  · Commands are case-insensitive
+  · clear wipes the screen; errors suggest fixes (e.g. neofetch not "neo fetch")
+  · Editor tab → Run loads about output in the terminal
+  · This console runs in the browser — not your Mac Terminal app`;
 
 function resolveTerminalCommand(raw) {
   const trimmed = raw.trim().toLowerCase().replace(/\s+/g, ' ');
@@ -1374,8 +1396,10 @@ function CertificationsSection({ visible }) {
 
 function TerminalIDE({ visible }) {
   const [history, setHistory] = useState([
-    { type: 'system', text: 'Georgia Tech Portfolio Terminal v2.0 — Type "help" to begin.' },
+    { type: 'system', text: 'Georgia Tech Portfolio Terminal v2.0' },
     { type: 'system', text: '─────────────────────────────────────────────' },
+    { type: 'system', text: 'Quick start: type help for commands · rules for navigation tips' },
+    { type: 'hint', text: '↑↓ history · Enter run · click panel to focus · Terminal | Editor tabs above' },
   ]);
   const [input, setInput] = useState('');
   const [commandHistory, setCommandHistory] = useState([]);
@@ -1478,9 +1502,11 @@ console.log("Building at the frontier.");`;
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-silver-bright">
             Mini <span className="text-gradient-gold">IDE</span> Terminal
           </h2>
-          <p className="mt-3 text-silver-muted max-w-xl">
-            Run commands to explore my resume.             Try <code className="px-1.5 py-0.5 rounded bg-white/5 font-mono text-gold text-sm">help</code>,{' '}
-            <code className="px-1.5 py-0.5 rounded bg-white/5 font-mono text-gold text-sm">certs</code>, or{' '}
+          <p className="mt-3 text-silver-muted max-w-2xl">
+            Explore my resume from the in-browser console below — not your Mac Terminal.
+            Start with{' '}
+            <code className="px-1.5 py-0.5 rounded bg-white/5 font-mono text-gold text-sm">rules</code>,{' '}
+            <code className="px-1.5 py-0.5 rounded bg-white/5 font-mono text-gold text-sm">help</code>, or{' '}
             <code className="px-1.5 py-0.5 rounded bg-white/5 font-mono text-gold text-sm">neofetch</code>.
           </p>
         </div>
@@ -1519,21 +1545,41 @@ console.log("Building at the frontier.");`;
 
           <div className="grid grid-cols-1 lg:grid-cols-5 min-h-[420px]">
             {/* Sidebar */}
-            <div className="hidden lg:block lg:col-span-1 bg-white/[0.02] border-r border-white/10 p-4">
-              <p className="text-[10px] uppercase tracking-wider text-silver-muted mb-3 font-mono">Explorer</p>
-              <div className="space-y-1 font-mono text-[11px]">
-                {['portfolio.config.ts', 'VIP/nas_pipeline.py', 'skills.yaml', 'projects/'].map((file, i) => (
-                  <div
-                    key={file}
-                    className={`flex items-center gap-2 px-2 py-1.5 rounded-md transition-all duration-300 ${
-                      i === 0 ? 'bg-gold/10 text-gold-glow border border-gold/20' : 'text-silver-muted hover:bg-white/5'
-                    }`}
-                    style={{ transitionDelay: `${i * 50}ms` }}
-                  >
-                    {file.endsWith('/') ? <FolderGit2 className="h-3 w-3" /> : <Hash className="h-3 w-3" />}
-                    {file}
-                  </div>
-                ))}
+            <div className="hidden lg:block lg:col-span-1 bg-white/[0.02] border-r border-white/10 p-4 space-y-5">
+              <div>
+                <p className="text-[10px] uppercase tracking-wider text-silver-muted mb-3 font-mono">Explorer</p>
+                <div className="space-y-1 font-mono text-[11px]">
+                  {['portfolio.config.ts', 'VIP/nas_pipeline.py', 'skills.yaml', 'projects/'].map((file, i) => (
+                    <div
+                      key={file}
+                      className={`flex items-center gap-2 px-2 py-1.5 rounded-md transition-all duration-300 ${
+                        i === 0 ? 'bg-gold/10 text-gold-glow border border-gold/20' : 'text-silver-muted hover:bg-white/5'
+                      }`}
+                      style={{ transitionDelay: `${i * 50}ms` }}
+                    >
+                      {file.endsWith('/') ? <FolderGit2 className="h-3 w-3" /> : <Hash className="h-3 w-3" />}
+                      {file}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-white/10">
+                <p className="text-[10px] uppercase tracking-wider text-gold/60 mb-2 font-mono">Quick guide</p>
+                <ul className="space-y-2 text-[10px] text-silver-muted leading-relaxed font-mono">
+                  <li><span className="text-gold/70">Enter</span> — run command</li>
+                  <li><span className="text-gold/70">↑ ↓</span> — command history</li>
+                  <li><span className="text-gold/70">rules</span> — full navigation help</li>
+                  <li><span className="text-gold/70">clear</span> — reset output</li>
+                  <li><span className="text-gold/70">Editor</span> tab — view config.ts</li>
+                </ul>
+                <button
+                  type="button"
+                  onClick={() => { setActiveTab('terminal'); executeCommand('rules'); inputRef.current?.focus(); }}
+                  className="mt-3 w-full rounded-md border border-gold/20 bg-gold/5 px-2 py-1.5 text-[10px] font-mono text-gold/80 hover:bg-gold/10 hover:text-gold transition-all duration-300"
+                >
+                  Print rules →
+                </button>
               </div>
             </div>
 
@@ -1552,6 +1598,7 @@ console.log("Building at the frontier.");`;
                         className={`mb-1 whitespace-pre-wrap transition-all duration-300 animate-fade-in ${
                           line.type === 'input' ? 'text-gold/80' :
                           line.type === 'error' ? 'text-red-400/80' :
+                          line.type === 'hint' ? 'text-gold/50 text-[11px] italic' :
                           line.type === 'system' ? 'text-silver-muted/60' :
                           'text-silver-bright/90'
                         }`}
@@ -1566,20 +1613,25 @@ console.log("Building at the frontier.");`;
                       </div>
                     )}
                   </div>
-                  <form onSubmit={handleSubmit} className="flex items-center gap-2 px-4 py-3 border-t border-white/10 bg-white/[0.02]">
-                    <span className="text-gold font-mono text-sm">$</span>
-                    <input
-                      ref={inputRef}
-                      type="text"
-                      value={input}
-                      onChange={(e) => setInput(e.target.value)}
-                      onKeyDown={handleKeyDown}
-                      disabled={isRunning}
-                      className="flex-1 bg-transparent font-mono text-sm text-silver-bright outline-none placeholder:text-silver-muted/40"
-                      placeholder="Type a command..."
-                      autoComplete="off"
-                      spellCheck={false}
-                    />
+                  <form onSubmit={handleSubmit} className="border-t border-white/10 bg-white/[0.02]">
+                    <div className="flex items-center gap-2 px-4 py-3">
+                      <span className="text-gold font-mono text-sm">$</span>
+                      <input
+                        ref={inputRef}
+                        type="text"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        disabled={isRunning}
+                        className="flex-1 bg-transparent font-mono text-sm text-silver-bright outline-none placeholder:text-silver-muted/40"
+                        placeholder="Try: help · rules · about · neofetch"
+                        autoComplete="off"
+                        spellCheck={false}
+                      />
+                    </div>
+                    <p className="px-4 pb-2 text-[10px] font-mono text-silver-muted/50 lg:hidden">
+                      ↑↓ history · Enter to run · type <span className="text-gold/60">rules</span> for help
+                    </p>
                   </form>
                 </>
               ) : (
