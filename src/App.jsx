@@ -26,6 +26,7 @@ import {
   Circle,
   Hash,
   Command,
+  Award,
 } from 'lucide-react';
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -36,7 +37,7 @@ const PROFILE = {
   name: 'Rishi Desai',
   title: 'Software Engineer · AI Researcher',
   subtitle: 'B.S. Computer Science (AI · Systems) @ Georgia Tech · GPA 3.88',
-  email: 'rishi317@gatech.edu',
+  email: 'rdesai317@gatech.edu',
   phone: '(470) 881-0768',
   location: 'Atlanta, GA',
   github: 'https://github.com/rdesai14',
@@ -73,40 +74,41 @@ const METRICS = [
 const PROJECTS = [
   {
     id: 1,
+    title: 'Plum',
+    category: 'ai',
+    github: 'https://github.com/rdesai14/AI-ATL-2025',
+    demo: 'https://devpost.com/software/presentai',
+    hook: 'Multi-agent AI coaching platform that scores presentations across speech, gestures, vocal inflection, and content — with Veo 3.1 gesture demo videos.',
+    context: 'Built at AI-ATL 2025 to give students and professionals instant presentation feedback without a human coach. Users upload a ≤3-minute MP4 plus optional reference documents; the backend orchestrates four specialized Gemini agents and returns a scored, timestamped analysis timeline.',
+    impact: [
+      'Architected a FastAPI job queue where each upload gets a UUID workspace, async background processing, and `/api/status/{job_id}` polling — handling videos up to 500 MB without blocking the request thread.',
+      'Ran four parallel Gemini 2.5 Pro agents (speech, gesture, inflection, content) against natively uploaded video files, aggregating timestamped markers into a single scored result with transcript, WPM, and filler-word detection.',
+      'Built content verification that extracts text from PDF/DOCX supporting docs via PyPDF2 and python-docx, then compares spoken content against the reference for factual gaps and structural drift.',
+      'Integrated Google Veo 3.1 through a dedicated `VeoGenerator` module to produce personalized gesture-correction demo clips tied to specific feedback markers in the React timeline player.',
+    ],
+    challenge: 'Gemini file uploads enter a `PROCESSING` state that can exceed two minutes on large videos. Built a polling loop in `AIAnalyzer` that blocks agent execution until the file reaches `ACTIVE`, with timeout guards and per-agent try/except fallbacks so a single failed analysis pass does not crash the entire job.',
+    tech: ['FastAPI', 'Gemini 2.5 Pro', 'Veo 3.1', 'React 19', 'FFmpeg', 'Framer Motion'],
+    metrics: { agents: '4 parallel', video: '500 MB', score: '/100' },
+    color: 'from-violet-500/20 to-fuchsia-500/20',
+    featured: true,
+  },
+  {
+    id: 2,
     title: 'Automated NAS Pipeline',
     category: 'ai',
     github: 'https://github.com/rdesai14/VIP',
-    hook: 'Distributed neural architecture search pipeline that evolves and evaluates YOLO variants at scale on a 500+ node HPC cluster.',
-    context: 'Georgia Tech VIP research lab focused on automated algorithm design. The team runs evolutionary search over object-detection architectures against COCO-scale datasets under tight compute budgets on shared SLURM infrastructure.',
+    hook: 'Evolutionary neural architecture search on Georgia Tech\'s HPC cluster — parallel SLURM evaluation of YOLO variants with CI-gated selection.',
+    context: 'Georgia Tech VIP Automated Algorithm Design lab. Production NAS runs on institute SLURM infrastructure against COCO-scale detection benchmarks; the public VIP repo hosts foundational DEAP genetic algorithm and genetic programming coursework that feeds into the research pipeline.',
     impact: [
       'Parallelized SLURM job orchestration across a 500+ node cluster to evaluate evolved YOLOv3 variants on 118K-image COCO 2017, enabling generation-scale NAS experiments.',
       'Cut per-generation wall time by ~50% (mAP50-95 held at 0.377–0.433) by tuning the PyTorch DDP training harness and hyperparameters across distributed workers.',
       'Extended GitHub Actions CI/CD to parse run outputs, classify architectures as pass/fail from fitness scores and runtime errors, and fast-track viable individuals without recomputation.',
       'Patched a population diversity bug in the genetic algorithm that was cloning parent architectures, restoring meaningful evolutionary pressure across generations.',
     ],
-    challenge: 'PyTorch DDP workers were failing silently across heterogeneous cluster nodes due to mismatched editable installs and submodule paths. Migrated the environment toolchain to an editable submodule install pattern so every SLURM worker resolved identical package versions before launching distributed training.',
-    tech: ['Python', 'PyTorch', 'SLURM', 'YOLOv3', 'GitHub Actions', 'DEAP'],
+    challenge: 'PyTorch DDP workers failed silently across heterogeneous SLURM nodes due to mismatched editable installs. Migrated to an editable submodule install pattern so every worker resolved identical package versions before launching distributed training — the same reproducibility pattern used in the DEAP lab notebooks.',
+    tech: ['Python', 'PyTorch', 'SLURM', 'YOLOv3', 'DEAP', 'GitHub Actions'],
     metrics: { cluster: '500+ nodes', speedup: '~50%', dataset: '118K imgs' },
     color: 'from-purple-500/20 to-blue-500/20',
-    featured: true,
-  },
-  {
-    id: 2,
-    title: 'iVue Geofencing Engine',
-    category: 'systems',
-    github: 'https://github.com/rdesai14/iVue-Data-Storage',
-    hook: 'Real-time geofencing engine and PostGIS pipeline that keeps autonomous drones inside FAA-regulated airspace during live missions.',
-    context: 'iVue Robotics builds drone prototyping platforms for students and operators who need FAA-compliant flight boundaries. The system must validate geofences against region-scale airspace datasets with low latency during mission planning and execution.',
-    impact: [
-      'Architected a geofencing engine with user-defined flight zones and real-time boundary enforcement, preventing unauthorized airspace entry during autonomous missions.',
-      'Built a high-throughput PostGIS pipeline for region-scale FAA datasets, optimizing spatial indexing to support low-latency validation across large geographic areas.',
-      'Reduced geofence violations by 28% by integrating FAA geospatial data into a distributed real-time validation workflow with Vue/Cesium mission visualization.',
-      'Shipped REST APIs and a flat-file server to deliver spatial data to the drone control GUI with reduced latency and improved navigation reliability.',
-    ],
-    challenge: 'FAA boundary datasets arrived in inconsistent formats with overlapping polygons that produced false-positive violations at zone edges. Built a preprocessing and validation layer with spatial indexing in PostgreSQL/PostGIS and cross-checked boundaries through distributed workflows before enforcing constraints in the live navigation loop.',
-    tech: ['PostgreSQL', 'PostGIS', 'Vue.js', 'CesiumJS', 'REST', 'Node.js'],
-    metrics: { violations: '-28%', scope: 'FAA-scale', stack: 'PostGIS' },
-    color: 'from-orange-500/20 to-red-500/20',
     featured: true,
   },
   {
@@ -114,74 +116,93 @@ const PROJECTS = [
     title: 'SnapShelf',
     category: 'fullstack',
     github: 'https://github.com/rdesai14/SnapShelf',
-    hook: 'AI-powered virtual fridge that recognizes food from photos, tracks expiration dates, and cuts household food waste.',
-    context: 'Hackathon-built consumer app targeting the 90M+ tons of annual U.S. food waste. Built for users who need frictionless inventory tracking without manual data entry — snap a photo and the system handles categorization and expiry inference.',
+    hook: 'Gemini-vision fridge scanner that detects food with bounding boxes, crops item thumbnails via Sharp, and matches grocery lists to inventory.',
+    context: 'Hackathon full-stack app combating household food waste. The Express backend sends fridge photos to Gemini 2.0 Flash with a strict JSON schema (name, qty, expiry days, category, normalized bbox); MongoDB persists inventory across three collections: `items`, `groceryList`, and `recipes`.',
     impact: [
-      'Shipped a full-stack MVP with React/Tailwind frontend and Node/Express backend, integrating Google Gemini for image recognition and automatic expiration inference.',
-      'Designed MongoDB schemas for virtual fridge inventory and grocery lists, enabling category sorting, expiry alerts, and location tracking inside the fridge.',
-      'Automated food categorization and expiration labeling from camera input, eliminating manual entry for core inventory workflows.',
-      'Delivered a production-ready hackathon product with AI-driven recognition, real-time backend sync, and a polished mobile-friendly UI in a compressed build window.',
+      'Built a Gemini vision pipeline in `server.js` that requests structured JSON detections with normalized `[x, y, w, h]` bounding boxes, then crops per-item thumbnails server-side using Sharp before storing in MongoDB.',
+      'Implemented strict lowercase name matching between fridge inventory and grocery lists — recipes classify as "Can Make Now" (0 missing), "May Need More" (1–2 missing), or ignored (3+ missing) with no fuzzy matching.',
+      'Added a `/compare` workflow and Gemini-powered recipe generation that re-prompts from live fridge inventory, persisting generated recipes to a dedicated MongoDB collection.',
+      'Wrapped Gemini responses with markdown-stripping, JSON extraction regex, safety-filter error handling, and 90-second timeouts to survive truncated or blocked model outputs in production.',
     ],
-    challenge: 'Gemini API responses for expiration dates were inconsistent across food categories and image quality levels. Wrapped inference calls with structured prompt templates, validation rules per category, and fallback defaults so the backend always persisted clean records even when the model returned ambiguous dates.',
-    tech: ['React', 'Tailwind', 'Node.js', 'Express', 'MongoDB', 'Gemini'],
-    metrics: { ai: 'Gemini', db: 'MongoDB', focus: 'Food waste' },
+    challenge: 'Gemini frequently returned JSON wrapped in markdown fences or truncated at `MAX_TOKENS`. Built a multi-stage parser that strips code fences, regex-extracts the outer JSON object, and validates the `items` array before writing to MongoDB — preventing corrupt detections from entering inventory.',
+    tech: ['React', 'Express', 'MongoDB', 'Gemini 2.0 Flash', 'Sharp', 'Multer'],
+    metrics: { model: 'Gemini Flash', crops: 'Sharp bbox', cols: '3 MongoDB' },
     color: 'from-emerald-500/20 to-teal-500/20',
     featured: true,
   },
   {
     id: 4,
-    title: 'F1 Lap Time Prediction',
-    category: 'ai',
-    github: 'https://github.com/rdesai14/F1_HungarianGrandPrixQualifying',
-    hook: 'ML regression pipeline that predicts F1 lap times from multi-season telemetry with automated ETL and ensemble model tuning.',
-    context: 'Personal analytics project combining a passion for Formula 1 with applied ML. The goal was to turn raw race telemetry across 5+ seasons into reliable lap time predictions with minimal manual preprocessing.',
+    title: 'iVue FAA Spatial Data Platform',
+    category: 'systems',
+    github: 'https://github.com/rdesai14/iVue-Data-Storage',
+    hook: 'Node.js REST platform ingesting live FAA UAS Facility Map data from ArcGIS and serving regional GeoJSON to drone mission-control clients.',
+    context: 'iVue Robotics drone prototyping stack needs low-latency access to FAA airspace boundaries during mission planning. This repo implements the data ingestion and REST serving layer — `server2.js` pulls from ArcGIS, `server.js` serves consolidated regional GeoJSON and prohibited-area datasets to the Vue/Cesium frontend.',
     impact: [
-      'Improved lap time prediction accuracy by 20% through feature engineering and statistical analysis across 5+ seasons of race telemetry using Pandas and NumPy.',
-      'Reduced regression model error by 15% by comparing ensemble models and optimizing hyperparameters in Scikit-Learn.',
-      'Eliminated 80% of manual preprocessing effort by building automated ETL pipelines for dataset ingestion, cleaning, and transformation.',
-      'Built an interactive React frontend to visualize qualifying predictions and model outputs for the Hungarian Grand Prix dataset.',
+      'Built `server2.js` to paginate the ArcGIS FAA UAS Facility Map FeatureServer (10K records/page) across all U.S. regions, chunking features into subregion JSON files with ceiling, airport, and coordinate metadata.',
+      'Shipped `server.js` REST endpoints — `/restricted`, `/facilities/:region`, and `/facilities/:region/:sub_region` — serving consolidated GeoJSON FeatureCollections from preprocessed flat-file assets with execution-time logging.',
+      'Added gzip compression middleware and paginated ArcGIS ingestion loops with `exceededTransferLimit` detection to reliably download region-scale datasets without timeout failures.',
+      'Reduced geofence violations by 28% at iVue by integrating this spatial data into the distributed real-time validation workflow used during autonomous drone missions.',
     ],
-    challenge: 'Telemetry features varied widely across seasons due to format changes and missing sensor channels. Standardized inputs through a modular ETL layer that imputed missing values, normalized track-specific features, and versioned cleaned datasets so model experiments stayed reproducible across pipeline runs.',
-    tech: ['Python', 'Scikit-Learn', 'Pandas', 'NumPy', 'React', 'ETL'],
-    metrics: { accuracy: '+20%', error: '-15%', etl: '-80% manual' },
-    color: 'from-cyan-500/20 to-indigo-500/20',
+    challenge: 'ArcGIS FeatureServer responses paginate unpredictably and omit features when `resultRecordCount` is too low for dense regions. Implemented a while-loop with offset tracking and `exceededTransferLimit` checks, writing 10K-feature subregion chunks to disk so the serving layer reads bounded JSON files instead of holding entire regions in memory.',
+    tech: ['Node.js', 'Express', 'ArcGIS REST', 'GeoJSON', 'Axios', 'Compression'],
+    metrics: { source: 'FAA ArcGIS', violations: '-28%', paginate: '10K/page' },
+    color: 'from-orange-500/20 to-red-500/20',
     featured: true,
   },
   {
     id: 5,
+    title: 'F1 Qualifying Predictor',
+    category: 'ai',
+    github: 'https://github.com/rdesai14/F1_HungarianGrandPrixQualifying',
+    hook: 'FastF1 telemetry pipeline with disk-cached qualifying sessions and scikit-learn regression to predict Q3 lap times from Q1/Q2 sectors.',
+    context: 'Personal F1 analytics project using the official FastF1 API. The Python pipeline caches qualifying sessions locally (`cache/`), converts `Timedelta` sector times to seconds, trains a `LinearRegression` model on Q1/Q2 features, and applies team/driver performance factors for race-specific predictions displayed in a React frontend.',
+    impact: [
+      'Built an automated FastF1 ETL pipeline fetching qualifying data across 13 rounds of the 2025 season plus the 2024 Hungarian GP, with local disk caching via `fastf1.Cache.enable_cache()`.',
+      'Improved lap time prediction accuracy by 20% through feature engineering on multi-season qualifying telemetry using Pandas, NumPy, and sector-time normalization.',
+      'Reduced regression model error by 15% by tuning a `LinearRegression` model on Q1/Q2 → Q3 features with train/test split evaluation (MAE and R² scoring).',
+      'Layered team and driver performance factor multipliers with controlled random variation for GP-specific qualifying rank predictions, rendered in a React frontend.',
+    ],
+    challenge: 'FastF1 returns sector times as `Timedelta` objects that break sklearn inputs when passed raw. Built a `convert_time_to_seconds` normalizer handling both `M:SS.s` strings and timedelta types, with `SimpleImputer` and `StandardScaler` prep steps so the regression pipeline accepts heterogeneous session formats across seasons.',
+    tech: ['Python', 'FastF1', 'Scikit-Learn', 'Pandas', 'NumPy', 'React'],
+    metrics: { sessions: '14 rounds', model: 'LinearReg', cache: 'FastF1 disk' },
+    color: 'from-cyan-500/20 to-indigo-500/20',
+    featured: true,
+  },
+  {
+    id: 6,
     title: 'Bit Bounty',
     category: 'systems',
     github: 'https://github.com/rdesai14/crypto-bounty-hackathon',
-    hook: 'Decentralized bug bounty platform where cryptographic proof triggers atomic ETH payouts for verified smart contract exploits.',
-    context: 'MIT Bitcoin Hackathon project building trustless security incentives for Solidity developers. Hunters submit exploits against published invariants; rewards release atomically in the same reverting sub-call if the invariant breaks.',
+    hook: 'Trustless bug bounty protocol where `BountyRegistry.sol` pays ETH atomically when an invariant checker confirms an exploit inside a reverting sandbox call.',
+    context: 'MIT Bitcoin Hackathon project. Tier 1 uses on-chain invariant checkers (`IInvariantChecker`) with pluggable rules (reentrancy locks, balance conservation, owner-only mutations). Tier 2 routes logic bugs through a FastAPI Gemini agent that compares NatSpec intent against observed storage diffs.',
     impact: [
-      'Built a sandbox that deploys hunter-submitted exploit bytecode via CREATE, funds it, and executes it inside an always-reverting EVM sub-call with atomic reward release on invariant violation.',
-      'Designed challenge-specific checker contracts supporting ERC-20, ETH, and NFT postconditions across heterogeneous bounty targets.',
-      'Integrated a frontend for exploit submission with contract source, descriptions, and before/after storage snapshots for on-chain verification.',
-      'Architected Tier 2 AI verdict flow analyzing NatSpec documentation against observed contract behavior with severity classification.',
+      'Implemented `submitExploit()` in `BountyRegistry.sol` using an always-reverting `executeCheckAndRevert()` self-call — decoding the `RESULT_MAGIC` bytes32 prefix from revert data to determine if the invariant broke without mutating chain state.',
+      'Built checker contracts (`UnstoppableChecker`, `TrusterChecker`, `FreeRiderChecker`) that deploy hunter bytecode via CREATE, fund it, execute the exploit, and verify challenge-specific postconditions.',
+      'Shipped Foundry test suites (`FreeRiderFlow.t.sol`, `TrusterFlow.t.sol`, `UnstoppableFlow.t.sol`) validating end-to-end bounty creation, exploit submission, and atomic payout flows.',
+      'Architected a Tier 2 FastAPI agent with swappable Gemini/Ollama backends that analyzes contract source against NatSpec and generates Foundry test templates for logic-level bugs.',
     ],
-    challenge: 'Getting the sandbox to correctly deploy arbitrary hunter bytecode, fund it, and invoke it within a reverting call frame required careful EVM reasoning about state rollback, call depth, and revert data encoding. Each checker had to remain generic enough for arbitrary exploits while enforcing challenge-specific asset and invariant constraints.',
-    tech: ['Solidity', 'Foundry', 'TypeScript', 'EVM', 'React'],
-    metrics: { payout: 'Atomic', chain: 'EVM', tier: 'AI verdicts' },
+    challenge: 'EVM sandboxing requires the checker sub-call to always revert while still communicating a boolean verdict. Encoded the result inside revert data with a `keccak256("BountyRegistry.InvariantResult")` magic prefix, then decoded it in the catch block of `submitExploit()` — separating controlled sandbox reverts from unexpected checker failures.',
+    tech: ['Solidity', 'Foundry', 'FastAPI', 'Gemini', 'TypeScript', 'EVM'],
+    metrics: { tier1: 'On-chain', tier2: 'AI agent', payout: 'Atomic ETH' },
     color: 'from-amber-500/20 to-yellow-500/20',
     featured: false,
   },
   {
-    id: 6,
-    title: 'AvengerRobotics Autonomy',
+    id: 7,
+    title: 'AvengerRobotics Swerve Stack',
     category: 'systems',
     github: 'https://github.com/rdesai14/FRC2024',
-    hook: 'Competition-grade autonomous stack for FIRST Robotics with vision-localized path planning and sensor-fused odometry.',
-    context: 'AvengerRobotics FIRST team in Forsyth County, GA — 3× World Championship qualifier. As Head of Programming, led software for a 120-lb competition robot operating under strict autonomous timing and reliability constraints on the field.',
+    hook: 'WPILib swerve drive subsystem with Pigeon2 gyro odometry and trajectory-following autonomous routines for FRC competition.',
+    context: 'AvengerRobotics — 3× FIRST World Championship qualifier, Georgia State Chairman\'s Award winner. The FRC2024 codebase implements a four-module CTRE swerve drivetrain with field-relative teleop and `SwerveControllerCommand`-based autonomous path following under strict 15-second auto windows.',
     impact: [
-      'Architected modular command-based robot control software enabling reusable concurrent subsystem actions, reducing integration conflicts during competition season.',
-      'Implemented a finite state machine for deterministic autonomous sequences, eliminating unpredictable state behavior during matches.',
-      'Integrated AprilTag vision and odometry for real-time pose estimation, significantly improving autonomous scoring accuracy.',
-      'Developed motion-profiled path planning with kinematic constraints and encoder/IMU/vision sensor fusion for robust field navigation.',
+      'Built the `Swerve` subsystem with four `SwerveModule` instances, Pigeon2 IMU integration, and `SwerveDriveOdometry` publishing field-relative pose for autonomous and teleop modes.',
+      'Implemented `exampleAuto` using `TrajectoryGenerator` with `ProfiledPIDController` heading control and dual-axis PID translation — generating smooth S-curve paths with kinematic saturation via `desaturateWheelSpeeds()`.',
+      'Architected command-based teleop (`TeleopSwerve`) with field-relative and robot-relative drive modes, decoupling driver input from module state management.',
+      'Led programming across three seasons as Head of Programming, integrating AprilTag vision pipelines and sensor fusion in companion repos (`FRC-2023-Code`) for world-qualifying autonomous performance.',
     ],
-    challenge: 'Autonomous reliability broke down when vision targets were ocated or lighting shifted on the competition field. Combined AprilTag detections with encoder and IMU data through a sensor fusion layer and fallback state transitions so the robot maintained usable pose estimates even when individual sensors degraded mid-match.',
-    tech: ['Java', 'WPILib', 'AprilTags', 'Odometry', 'FSM', 'Sensor Fusion'],
-    metrics: { worlds: '3×', award: 'Autonomous', role: 'Head of Prog' },
+    challenge: 'Swerve odometry drifted when gyro yaw reset timing conflicted with module encoder reads during auto initialization. Sequenced auto startup with an `InstantCommand` pose reset to the trajectory\'s initial `Pose2d` before engaging `SwerveControllerCommand`, ensuring the controller started from a consistent state relative to generated waypoints.',
+    tech: ['Java', 'WPILib', 'CTRE Phoenix', 'Pigeon2', 'Swerve Drive', 'Trajectory Planning'],
+    metrics: { worlds: '3×', drive: '4-module swerve', imu: 'Pigeon2' },
     color: 'from-pink-500/20 to-rose-500/20',
     featured: false,
   },
@@ -246,12 +267,12 @@ const EXPERIENCE = [
     context: 'iVue Robotics builds drone prototyping platforms for students and commercial operators. The engineering team ships real-time flight visualization, spatial data services, and regulatory compliance tooling for autonomous aerial systems.',
     impact: [
       'Architected a geofencing engine with real-time boundary enforcement, preventing unauthorized airspace entry during autonomous drone missions.',
-      'Built a PostGIS pipeline for region-scale FAA datasets with optimized spatial indexing for low-latency geofence validation.',
-      'Reduced geofence violations by 28% through distributed validation workflows integrating FAA geospatial data into live navigation.',
-      'Developed a Vue/Cesium drone control GUI and REST APIs delivering real-time spatial data to mission planning interfaces.',
+      'Built an ArcGIS FAA UAS Facility Map ingestion pipeline with paginated REST queries and chunked GeoJSON flat-file storage, served via Express REST endpoints to the Vue/Cesium mission GUI.',
+      'Reduced geofence violations by 28% by integrating FAA geospatial data into a distributed real-time validation workflow during live autonomous flights.',
+      'Developed a Vue/Cesium drone control GUI and REST APIs delivering spatial data to mission planning interfaces with reduced latency.',
     ],
-    challenge: 'Region-scale FAA polygons overlapped inconsistently, producing false geofence triggers at zone boundaries during live flights. Built a preprocessing layer with spatial validation and indexed PostGIS queries so the enforcement engine only blocked genuinely restricted airspace.',
-    tech: ['Vue.js', 'CesiumJS', 'PostgreSQL', 'PostGIS', 'REST', 'Node.js'],
+    challenge: 'ArcGIS FeatureServer pagination returned incomplete region datasets when batch sizes were too small for dense airspace zones. Built offset-tracked ingestion loops with `exceededTransferLimit` detection, writing bounded subregion JSON files so the serving layer never loaded entire regions into memory at request time.',
+    tech: ['Vue.js', 'CesiumJS', 'Node.js', 'Express', 'ArcGIS REST', 'GeoJSON'],
   },
   {
     id: 5,
@@ -307,7 +328,8 @@ const TERMINAL_COMMANDS = {
   contact    — Contact information
   clear      — Clear terminal
   whoami     — Identity check
-  neofetch   — System info banner`,
+  neofetch   — System info banner
+  certs      — Professional certifications`,
   about: () => `${PROFILE.name}
 ${PROFILE.subtitle}
 ${PROFILE.tagline}
@@ -330,6 +352,9 @@ Phone:    ${PROFILE.phone}
 GitHub:   ${PROFILE.github}
 LinkedIn: ${PROFILE.linkedin}
 Location: ${PROFILE.location}`,
+  certs: () => CERTIFICATIONS
+    .map((c) => `▪ ${c.name}\n  ${c.issuer} · ${c.date}${c.credential ? `\n  ${c.credential}` : ''}`)
+    .join('\n\n'),
   whoami: () => PROFILE.name,
   neofetch: () => `     ██████╗ ██╗███████╗██╗  ██╗██╗
      ██╔══██╗██║██╔════╝██║  ██║██║
@@ -373,7 +398,44 @@ const NAV_ITEMS = [
   { id: 'matrix', label: 'Matrix' },
   { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
+  { id: 'certifications', label: 'Certs' },
   { id: 'terminal', label: 'Terminal' },
+];
+
+const CERTIFICATIONS = [
+  {
+    id: 1,
+    name: 'IT Specialist — Java',
+    issuer: 'Certiport (Pearson VUE)',
+    date: 'Apr 2024',
+    credential: 'https://credly.com/badges/15385be8-cfce-4feb-977e-b8aa8546b4e7',
+  },
+  {
+    id: 2,
+    name: 'IT Specialist — Software Development',
+    issuer: 'Certiport (Pearson VUE)',
+    date: 'Apr 2024',
+    credential: 'https://credly.com/badges/fca0d860-a071-4c58-87bc-0c73f92aa9b6',
+  },
+  {
+    id: 3,
+    name: 'Mechatronics',
+    issuer: 'NOCTI',
+    date: 'Mar 2024',
+  },
+  {
+    id: 4,
+    name: 'Certified SOLIDWORKS Associate',
+    issuer: 'Dassault Systèmes',
+    date: 'May 2023',
+  },
+  {
+    id: 5,
+    name: 'Microsoft Office Specialist — PowerPoint',
+    issuer: 'Microsoft',
+    date: 'May 2022',
+    credential: 'https://credly.com/badges/41dd9efa-3ed5-4dd1-b080-dbaec8fa79e7',
+  },
 ];
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -1073,10 +1135,22 @@ function ProjectShowcase({ visible }) {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="inline-flex items-center gap-1.5 text-xs text-gold/70 hover:text-gold transition-colors duration-300"
+                            className="inline-flex items-center gap-1.5 text-xs text-gold/70 hover:text-gold transition-colors duration-300 mr-4"
                           >
                             <Github className="h-3.5 w-3.5" />
-                            View on GitHub
+                            GitHub
+                          </a>
+                        )}
+                        {project.demo && (
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="inline-flex items-center gap-1.5 text-xs text-gold/70 hover:text-gold transition-colors duration-300"
+                          >
+                            <ExternalLink className="h-3.5 w-3.5" />
+                            Devpost
                           </a>
                         )}
                       </div>
@@ -1206,6 +1280,98 @@ function ExperienceTimeline({ visible }) {
   );
 }
 
+function CertificationsSection({ visible }) {
+  return (
+    <section id="certifications" className="relative py-32 px-6">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-navy/30 to-transparent" />
+      <div className="relative mx-auto max-w-5xl">
+        <div className={`mb-16 transition-all duration-700 ease-out-expo ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="flex items-center gap-3 mb-4">
+            <Award className="h-5 w-5 text-gold" />
+            <span className="font-mono text-xs tracking-[0.3em] text-gold/60 uppercase">Credentials</span>
+          </div>
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-silver-bright">
+            Certifications <span className="text-gradient-gold">& Awards</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {CERTIFICATIONS.map((cert, i) => (
+            <GlowCard
+              key={cert.id}
+              className="p-5 h-full"
+              style={{
+                animation: visible ? `fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${i * 80}ms forwards` : 'none',
+                opacity: visible ? undefined : 0,
+              }}
+            >
+              <div className="flex items-start gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold/10 border border-gold/20">
+                  <Award className="h-4 w-4 text-gold" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-display text-sm font-bold text-silver-bright leading-snug">{cert.name}</h3>
+                  <p className="text-xs text-gold/70 mt-1">{cert.issuer}</p>
+                  <p className="text-[10px] font-mono text-silver-muted mt-1">{cert.date}</p>
+                  {cert.credential && (
+                    <a
+                      href={cert.credential}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 mt-3 text-[10px] text-gold/60 hover:text-gold transition-colors duration-300"
+                    >
+                      Verify credential
+                      <ArrowUpRight className="h-3 w-3" />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </GlowCard>
+          ))}
+
+          <GlowCard
+            className="p-5 sm:col-span-2 lg:col-span-1"
+            style={{
+              animation: visible ? 'fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 400ms forwards' : 'none',
+              opacity: visible ? undefined : 0,
+            }}
+          >
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold/10 border border-gold/20">
+                <Rocket className="h-4 w-4 text-gold" />
+              </div>
+              <div>
+                <h3 className="font-display text-sm font-bold text-silver-bright">FIRST Robotics — Autonomous Award</h3>
+                <p className="text-xs text-gold/70 mt-1">FIRST Robotics Competition</p>
+                <p className="text-[10px] font-mono text-silver-muted mt-1">Mar 2024 · 3× World Championship Qualifier</p>
+              </div>
+            </div>
+          </GlowCard>
+
+          <GlowCard
+            className="p-5 sm:col-span-2 lg:col-span-2"
+            style={{
+              animation: visible ? 'fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 480ms forwards' : 'none',
+              opacity: visible ? undefined : 0,
+            }}
+          >
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold/10 border border-gold/20">
+                <Star className="h-4 w-4 text-gold fill-gold/20" />
+              </div>
+              <div>
+                <h3 className="font-display text-sm font-bold text-silver-bright">Georgia FBLA — Coding & Programming, 1st Place</h3>
+                <p className="text-xs text-gold/70 mt-1">Georgia State Leadership Conference</p>
+                <p className="text-[10px] font-mono text-silver-muted mt-1">Mar 2024 · Georgia State Chairman&apos;s Award (FIRST)</p>
+              </div>
+            </div>
+          </GlowCard>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function TerminalIDE({ visible }) {
   const [history, setHistory] = useState([
     { type: 'system', text: 'Georgia Tech Portfolio Terminal v2.0 — Type "help" to begin.' },
@@ -1313,8 +1479,8 @@ console.log("Building at the frontier.");`;
             Mini <span className="text-gradient-gold">IDE</span> Terminal
           </h2>
           <p className="mt-3 text-silver-muted max-w-xl">
-            Run commands to explore my resume. Try <code className="px-1.5 py-0.5 rounded bg-white/5 font-mono text-gold text-sm">help</code>,{' '}
-            <code className="px-1.5 py-0.5 rounded bg-white/5 font-mono text-gold text-sm">about</code>, or{' '}
+            Run commands to explore my resume.             Try <code className="px-1.5 py-0.5 rounded bg-white/5 font-mono text-gold text-sm">help</code>,{' '}
+            <code className="px-1.5 py-0.5 rounded bg-white/5 font-mono text-gold text-sm">certs</code>, or{' '}
             <code className="px-1.5 py-0.5 rounded bg-white/5 font-mono text-gold text-sm">neofetch</code>.
           </p>
         </div>
@@ -1502,6 +1668,7 @@ export default function App() {
   const [matrixRef, matrixVisible] = useInView(0.1);
   const [projectsRef, projectsVisible] = useInView(0.1);
   const [experienceRef, experienceVisible] = useInView(0.1);
+  const [certsRef, certsVisible] = useInView(0.1);
   const [terminalRef, terminalVisible] = useInView(0.1);
 
   useEffect(() => {
@@ -1556,6 +1723,9 @@ export default function App() {
           </div>
           <div ref={experienceRef}>
             <ExperienceTimeline visible={experienceVisible} />
+          </div>
+          <div ref={certsRef}>
+            <CertificationsSection visible={certsVisible} />
           </div>
           <div ref={terminalRef}>
             <TerminalIDE visible={terminalVisible} />
