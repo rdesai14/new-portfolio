@@ -34,134 +34,190 @@ import {
 
 const PROFILE = {
   name: 'Rishi Desai',
-  title: 'Software Engineer & AI Researcher',
-  subtitle: 'B.S. Computer Science @ Georgia Tech · GPA 3.88',
-  email: 'rdesai317@gatech.edu',
+  title: 'Software Engineer · AI Researcher',
+  subtitle: 'B.S. Computer Science (AI · Systems) @ Georgia Tech · GPA 3.88',
+  email: 'rishi317@gatech.edu',
   phone: '(470) 881-0768',
   location: 'Atlanta, GA',
   github: 'https://github.com/rdesai14',
   linkedin: 'https://www.linkedin.com/in/rishi-desai-16964a290/',
-  tagline: 'Researching evolutionary neural architecture search on HPC clusters while building full-stack platforms, computer vision pipelines, and cloud infrastructure.',
+  tagline: 'Building distributed ML pipelines, autonomous robotics stacks, and production full-stack systems — from HPC clusters to edge inference.',
   education: 'Georgia Institute of Technology · Expected Dec 2027',
-  concentration: 'Artificial Intelligence · Systems & Architecture',
+  focus: 'Artificial Intelligence · Systems & Architecture',
 };
 
 const SPECIALIZATIONS = [
   'Automated Algorithm Design Researcher',
-  'Full-Stack Software Engineer',
   'Computer Vision & Edge AI Engineer',
-  'Cloud Infrastructure Architect',
-  'Distributed Geospatial Systems Builder',
-  'Evolutionary ML Pipeline Engineer',
+  'Full-Stack Software Engineer',
+  'Robotics & Autonomous Systems Lead',
+  'Cloud Infrastructure Engineer',
+  'Geospatial Systems Developer',
 ];
 
 const SKILLS = {
-  languages: ['Python', 'Java', 'C++', 'JavaScript', 'TypeScript', 'C', 'SQL', 'Assembly'],
-  frontend: ['React', 'Vue.js', 'Vite', 'Node.js', 'Bootstrap', 'MVVM'],
-  cloud: ['Google Cloud', 'AWS EC2', 'IAM', 'S3', 'Firebase', 'Docker', 'CI/CD'],
-  data: ['PostgreSQL', 'MongoDB', 'PostGIS', 'Git', 'Bash', 'Linux', 'ETL'],
-  ml: ['PyTorch', 'Scikit-Learn', 'YOLOv8', 'PaddleOCR', 'DEAP', 'CUDA', 'LLMs'],
+  languages: ['Python', 'Java', 'C++', 'TypeScript', 'JavaScript', 'C', 'SQL'],
+  frontend: ['React', 'Vue.js', 'Vite', 'Bootstrap', 'Tailwind', 'CesiumJS'],
+  backend: ['Node.js', 'Express', 'REST APIs', 'MongoDB', 'PostgreSQL', 'PostGIS'],
+  cloud: ['GCP', 'AWS EC2', 'Firebase', 'Docker', 'CI/CD', 'GitHub Actions'],
+  ml: ['PyTorch', 'Scikit-Learn', 'YOLOv8', 'PaddleOCR', 'CUDA', 'DEAP', 'LLMs'],
 };
 
 const METRICS = [
   { label: 'GPA', value: '3.88', icon: Star },
-  { label: 'Repositories', value: '18', icon: FolderGit2 },
-  { label: 'Contributions', value: '83+', icon: GitBranch },
-  { label: 'Languages', value: '8', icon: Code2 },
+  { label: 'GitHub Repos', value: '18+', icon: FolderGit2 },
+  { label: 'FRC Worlds', value: '3×', icon: Rocket },
+  { label: 'Languages', value: '10+', icon: Code2 },
 ];
 
 const PROJECTS = [
   {
     id: 1,
-    title: 'Evolutionary NAS Pipeline',
+    title: 'Automated NAS Pipeline',
     category: 'ai',
-    description: 'Distributed neural architecture search on a 500+ node HPC cluster, parallelizing SLURM jobs to evolve YOLOv3 variants on COCO 2017. Patched genetic algorithm diversity bugs and extended GitHub Actions CI to validate evolutionary runs.',
-    tech: ['Python', 'PyTorch', 'SLURM', 'YOLO', 'DEAP', 'GitHub Actions'],
-    metrics: { speedup: '50%', mAP: '0.377–0.433', cluster: '500+ nodes' },
+    github: 'https://github.com/rdesai14/VIP',
+    hook: 'Distributed neural architecture search pipeline that evolves and evaluates YOLO variants at scale on a 500+ node HPC cluster.',
+    context: 'Georgia Tech VIP research lab focused on automated algorithm design. The team runs evolutionary search over object-detection architectures against COCO-scale datasets under tight compute budgets on shared SLURM infrastructure.',
+    impact: [
+      'Parallelized SLURM job orchestration across a 500+ node cluster to evaluate evolved YOLOv3 variants on 118K-image COCO 2017, enabling generation-scale NAS experiments.',
+      'Cut per-generation wall time by ~50% (mAP50-95 held at 0.377–0.433) by tuning the PyTorch DDP training harness and hyperparameters across distributed workers.',
+      'Extended GitHub Actions CI/CD to parse run outputs, classify architectures as pass/fail from fitness scores and runtime errors, and fast-track viable individuals without recomputation.',
+      'Patched a population diversity bug in the genetic algorithm that was cloning parent architectures, restoring meaningful evolutionary pressure across generations.',
+    ],
+    challenge: 'PyTorch DDP workers were failing silently across heterogeneous cluster nodes due to mismatched editable installs and submodule paths. Migrated the environment toolchain to an editable submodule install pattern so every SLURM worker resolved identical package versions before launching distributed training.',
+    tech: ['Python', 'PyTorch', 'SLURM', 'YOLOv3', 'GitHub Actions', 'DEAP'],
+    metrics: { cluster: '500+ nodes', speedup: '~50%', dataset: '118K imgs' },
     color: 'from-purple-500/20 to-blue-500/20',
     featured: true,
-    github: 'https://github.com/rdesai14/VIP',
   },
   {
     id: 2,
     title: 'iVue Geofencing Engine',
     category: 'systems',
-    description: 'Geofencing engine for autonomous drone navigation with PostgreSQL/PostGIS pipelines managing region-scale FAA airspace datasets. Real-time distributed validation reduced geofence violations by 28%.',
-    tech: ['PostgreSQL', 'PostGIS', 'Vue.js', 'REST', 'Cesium'],
-    metrics: { violations: '-28%', scale: 'Region-scale', latency: 'Real-time' },
+    github: 'https://github.com/rdesai14/iVue-Data-Storage',
+    hook: 'Real-time geofencing engine and PostGIS pipeline that keeps autonomous drones inside FAA-regulated airspace during live missions.',
+    context: 'iVue Robotics builds drone prototyping platforms for students and operators who need FAA-compliant flight boundaries. The system must validate geofences against region-scale airspace datasets with low latency during mission planning and execution.',
+    impact: [
+      'Architected a geofencing engine with user-defined flight zones and real-time boundary enforcement, preventing unauthorized airspace entry during autonomous missions.',
+      'Built a high-throughput PostGIS pipeline for region-scale FAA datasets, optimizing spatial indexing to support low-latency validation across large geographic areas.',
+      'Reduced geofence violations by 28% by integrating FAA geospatial data into a distributed real-time validation workflow with Vue/Cesium mission visualization.',
+      'Shipped REST APIs and a flat-file server to deliver spatial data to the drone control GUI with reduced latency and improved navigation reliability.',
+    ],
+    challenge: 'FAA boundary datasets arrived in inconsistent formats with overlapping polygons that produced false-positive violations at zone edges. Built a preprocessing and validation layer with spatial indexing in PostgreSQL/PostGIS and cross-checked boundaries through distributed workflows before enforcing constraints in the live navigation loop.',
+    tech: ['PostgreSQL', 'PostGIS', 'Vue.js', 'CesiumJS', 'REST', 'Node.js'],
+    metrics: { violations: '-28%', scope: 'FAA-scale', stack: 'PostGIS' },
     color: 'from-orange-500/20 to-red-500/20',
     featured: true,
-    github: 'https://github.com/rdesai14/iVue-Data-Storage',
   },
   {
     id: 3,
-    title: 'HexLabs Cloud Platform',
+    title: 'SnapShelf',
     category: 'fullstack',
-    description: 'Managed GCP infrastructure cutting monthly spend by 50%, deployed MongoDB-backed REST APIs in Docker, and built hackathon judging software with React for real-time submission tracking.',
-    tech: ['React', 'MongoDB', 'Docker', 'GCP', 'REST'],
-    metrics: { cost: '-50%', issues: '-40%', apis: 'REST' },
+    github: 'https://github.com/rdesai14/SnapShelf',
+    hook: 'AI-powered virtual fridge that recognizes food from photos, tracks expiration dates, and cuts household food waste.',
+    context: 'Hackathon-built consumer app targeting the 90M+ tons of annual U.S. food waste. Built for users who need frictionless inventory tracking without manual data entry — snap a photo and the system handles categorization and expiry inference.',
+    impact: [
+      'Shipped a full-stack MVP with React/Tailwind frontend and Node/Express backend, integrating Google Gemini for image recognition and automatic expiration inference.',
+      'Designed MongoDB schemas for virtual fridge inventory and grocery lists, enabling category sorting, expiry alerts, and location tracking inside the fridge.',
+      'Automated food categorization and expiration labeling from camera input, eliminating manual entry for core inventory workflows.',
+      'Delivered a production-ready hackathon product with AI-driven recognition, real-time backend sync, and a polished mobile-friendly UI in a compressed build window.',
+    ],
+    challenge: 'Gemini API responses for expiration dates were inconsistent across food categories and image quality levels. Wrapped inference calls with structured prompt templates, validation rules per category, and fallback defaults so the backend always persisted clean records even when the model returned ambiguous dates.',
+    tech: ['React', 'Tailwind', 'Node.js', 'Express', 'MongoDB', 'Gemini'],
+    metrics: { ai: 'Gemini', db: 'MongoDB', focus: 'Food waste' },
     color: 'from-emerald-500/20 to-teal-500/20',
     featured: true,
-    github: 'https://github.com/rdesai14/HexLabs',
   },
   {
     id: 4,
     title: 'F1 Lap Time Prediction',
     category: 'ai',
-    description: 'ML pipeline predicting Formula 1 lap times across 5+ seasons of telemetry. Feature engineering and ensemble modeling in Scikit-Learn with automated ETL eliminating 80% of manual preprocessing.',
-    tech: ['Scikit-Learn', 'React', 'Pandas', 'NumPy', 'ETL'],
-    metrics: { accuracy: '+20%', error: '-15%', etl: '80% automated' },
-    color: 'from-cyan-500/20 to-indigo-500/20',
-    featured: false,
     github: 'https://github.com/rdesai14/F1_HungarianGrandPrixQualifying',
+    hook: 'ML regression pipeline that predicts F1 lap times from multi-season telemetry with automated ETL and ensemble model tuning.',
+    context: 'Personal analytics project combining a passion for Formula 1 with applied ML. The goal was to turn raw race telemetry across 5+ seasons into reliable lap time predictions with minimal manual preprocessing.',
+    impact: [
+      'Improved lap time prediction accuracy by 20% through feature engineering and statistical analysis across 5+ seasons of race telemetry using Pandas and NumPy.',
+      'Reduced regression model error by 15% by comparing ensemble models and optimizing hyperparameters in Scikit-Learn.',
+      'Eliminated 80% of manual preprocessing effort by building automated ETL pipelines for dataset ingestion, cleaning, and transformation.',
+      'Built an interactive React frontend to visualize qualifying predictions and model outputs for the Hungarian Grand Prix dataset.',
+    ],
+    challenge: 'Telemetry features varied widely across seasons due to format changes and missing sensor channels. Standardized inputs through a modular ETL layer that imputed missing values, normalized track-specific features, and versioned cleaned datasets so model experiments stayed reproducible across pipeline runs.',
+    tech: ['Python', 'Scikit-Learn', 'Pandas', 'NumPy', 'React', 'ETL'],
+    metrics: { accuracy: '+20%', error: '-15%', etl: '-80% manual' },
+    color: 'from-cyan-500/20 to-indigo-500/20',
+    featured: true,
   },
   {
     id: 5,
-    title: 'Apago Vision Systems',
-    category: 'ai',
-    description: 'Real-time computer vision with YOLO and OCR for rail detection and license plate tracking. CUDA-accelerated inference deployed on NVIDIA Jetson for low-latency edge detection.',
-    tech: ['YOLO', 'PaddleOCR', 'CUDA', 'Jetson', 'Python'],
-    metrics: { deployment: 'Edge', inference: 'Real-time', domain: 'CV + OCR' },
+    title: 'Bit Bounty',
+    category: 'systems',
+    github: 'https://github.com/rdesai14/crypto-bounty-hackathon',
+    hook: 'Decentralized bug bounty platform where cryptographic proof triggers atomic ETH payouts for verified smart contract exploits.',
+    context: 'MIT Bitcoin Hackathon project building trustless security incentives for Solidity developers. Hunters submit exploits against published invariants; rewards release atomically in the same reverting sub-call if the invariant breaks.',
+    impact: [
+      'Built a sandbox that deploys hunter-submitted exploit bytecode via CREATE, funds it, and executes it inside an always-reverting EVM sub-call with atomic reward release on invariant violation.',
+      'Designed challenge-specific checker contracts supporting ERC-20, ETH, and NFT postconditions across heterogeneous bounty targets.',
+      'Integrated a frontend for exploit submission with contract source, descriptions, and before/after storage snapshots for on-chain verification.',
+      'Architected Tier 2 AI verdict flow analyzing NatSpec documentation against observed contract behavior with severity classification.',
+    ],
+    challenge: 'Getting the sandbox to correctly deploy arbitrary hunter bytecode, fund it, and invoke it within a reverting call frame required careful EVM reasoning about state rollback, call depth, and revert data encoding. Each checker had to remain generic enough for arbitrary exploits while enforcing challenge-specific asset and invariant constraints.',
+    tech: ['Solidity', 'Foundry', 'TypeScript', 'EVM', 'React'],
+    metrics: { payout: 'Atomic', chain: 'EVM', tier: 'AI verdicts' },
     color: 'from-amber-500/20 to-yellow-500/20',
     featured: false,
   },
   {
     id: 6,
-    title: 'AvengerRobotics FRC',
+    title: 'AvengerRobotics Autonomy',
     category: 'systems',
-    description: 'Head of Programming for FIRST Robotics Team 7777. Command-based robot control, finite state machines for autonomous sequences, and AprilTag vision with sensor fusion for pose estimation.',
-    tech: ['Java', 'Odometry', 'AprilTag', 'FSM', 'Path Planning'],
-    metrics: { role: 'Head of Prog.', team: 'FRC 7777', seasons: '2023–2025' },
+    github: 'https://github.com/rdesai14/FRC2024',
+    hook: 'Competition-grade autonomous stack for FIRST Robotics with vision-localized path planning and sensor-fused odometry.',
+    context: 'AvengerRobotics FIRST team in Forsyth County, GA — 3× World Championship qualifier. As Head of Programming, led software for a 120-lb competition robot operating under strict autonomous timing and reliability constraints on the field.',
+    impact: [
+      'Architected modular command-based robot control software enabling reusable concurrent subsystem actions, reducing integration conflicts during competition season.',
+      'Implemented a finite state machine for deterministic autonomous sequences, eliminating unpredictable state behavior during matches.',
+      'Integrated AprilTag vision and odometry for real-time pose estimation, significantly improving autonomous scoring accuracy.',
+      'Developed motion-profiled path planning with kinematic constraints and encoder/IMU/vision sensor fusion for robust field navigation.',
+    ],
+    challenge: 'Autonomous reliability broke down when vision targets were ocated or lighting shifted on the competition field. Combined AprilTag detections with encoder and IMU data through a sensor fusion layer and fallback state transitions so the robot maintained usable pose estimates even when individual sensors degraded mid-match.',
+    tech: ['Java', 'WPILib', 'AprilTags', 'Odometry', 'FSM', 'Sensor Fusion'],
+    metrics: { worlds: '3×', award: 'Autonomous', role: 'Head of Prog' },
     color: 'from-pink-500/20 to-rose-500/20',
     featured: false,
-    github: 'https://github.com/rdesai14/FRC2024',
   },
 ];
 
 const EXPERIENCE = [
   {
     id: 1,
-    role: 'Incoming Software Engineering & AI Solutions Intern',
+    role: 'Software Engineering & AI Solutions Intern',
     company: 'Quatrro / ContinuServe',
     period: 'May 2026 — Present',
     location: 'Marietta, GA',
-    description: 'Incoming intern focused on software engineering and AI solutions at Quatrro Business Support Solutions.',
-    tech: ['Python', 'AI/ML', 'Software Engineering'],
-    highlights: ['Joining May 2026 to build production AI solutions'],
+    hook: 'Incoming intern on AI-driven business support solutions at an IAOP Global 100 BPO firm.',
+    context: 'ContinuServe (Quatrro Business Support Solutions) delivers outsourced finance, HR, and operations services at enterprise scale. The AI solutions team builds automation tooling that improves accuracy and throughput across client operations.',
+    impact: [
+      'Joining the AI solutions engineering team to build production automation systems for enterprise BPO workflows.',
+    ],
+    challenge: 'Role begins May 2026 — focused on applying distributed systems and ML experience to production business automation at enterprise client scale.',
+    tech: ['Python', 'AI/ML', 'Cloud', 'Automation'],
   },
   {
     id: 2,
-    role: 'Undergraduate Researcher — Automated Algorithm Design Lab',
-    company: 'Georgia Tech VIP Program',
+    role: 'Undergraduate Researcher',
+    company: 'Georgia Tech VIP — Automated Algorithm Design Lab',
     period: 'Dec 2025 — Present',
     location: 'Atlanta, GA',
-    description: 'Built and deployed a distributed neural architecture search pipeline on a 500+ node HPC cluster, parallelizing SLURM jobs to evaluate evolved YOLOv3 variants on 118K-image COCO 2017.',
-    tech: ['Python', 'PyTorch', 'SLURM', 'DEAP', 'YOLO', 'GitHub Actions'],
-    highlights: [
-      'Cut per-generation wall time by ~50% through hyperparameter tuning while preserving mAP50-95 of 0.377–0.433',
-      'Patched population diversity bug in genetic algorithm that was cloning parent architectures',
-      'Extended GitHub Actions CI/CD to parse output files and classify architectures as pass/fail',
+    hook: 'Research engineer running evolutionary NAS pipelines on Georgia Tech\'s HPC cluster to discover optimized object-detection architectures.',
+    context: 'Vertically Integrated Projects (VIP) research program at Georgia Tech. The Automated Algorithm Design lab evolves neural architectures under compute constraints, comparing evolutionary search against traditional ML baselines on large-scale vision benchmarks.',
+    impact: [
+      'Deployed a distributed NAS pipeline on a 500+ node SLURM cluster, parallelizing evaluation of evolved YOLOv3 variants on 118K-image COCO 2017.',
+      'Cut per-generation wall time by ~50% while preserving model quality (mAP50-95: 0.377–0.433) through targeted PyTorch DDP hyperparameter tuning.',
+      'Automated evolutionary run validation in GitHub Actions CI/CD, parsing fitness scores and runtime errors to classify architectures without recomputation.',
+      'Patched a genetic algorithm diversity bug cloning parent architectures, restoring effective search pressure across the population.',
     ],
+    challenge: 'Distributed PyTorch workers on SLURM nodes hit silent failures from inconsistent package installs across the cluster. Resolved this by migrating to an editable submodule install pattern that guaranteed identical dependency resolution before every DDP launch.',
+    tech: ['Python', 'PyTorch', 'SLURM', 'DEAP', 'YOLOv3', 'GitHub Actions'],
   },
   {
     id: 3,
@@ -169,55 +225,67 @@ const EXPERIENCE = [
     company: 'HexLabs Inc.',
     period: 'Dec 2025 — Present',
     location: 'Atlanta, GA',
-    description: 'Managed GCP cloud infrastructure, built API-driven MongoDB applications in Docker, and developed hackathon judging software with React for automated submission tracking.',
-    tech: ['React', 'MongoDB', 'Docker', 'GCP', 'REST', 'CI/CD'],
-    highlights: [
-      'Reduced monthly cloud spending by 50% while maintaining high availability',
-      'Cut recurring issues by 40% through logging, monitoring, and automated testing',
-      'Built REST APIs enabling reliable, scalable data exchange across services',
+    hook: 'Engineer on the team behind HackGT — building hackathon infrastructure, judging software, and production web services.',
+    context: 'HexLabs is a student-led nonprofit running large-scale hackathons (HackGT) for thousands of participants. The tech team maintains event infrastructure, participant databases, and internal tooling used across multiple annual events.',
+    impact: [
+      'Reduced monthly GCP spend by 50% by optimizing cloud resource allocation and deployment pipelines while maintaining system availability.',
+      'Designed and deployed an API-driven application with MongoDB and Docker, improving service scalability through REST endpoints.',
+      'Built hackathon judging software automating submission tracking and scoring workflows for event organizers.',
+      'Reduced recurring production issues by 40% by implementing structured logging, monitoring, and automated testing across the stack.',
     ],
+    challenge: 'Hackathon traffic spikes caused MongoDB connection pool exhaustion during peak submission windows. Introduced connection pooling limits, read-optimized query patterns, and containerized service restarts through Docker so the API stayed responsive under bursty load.',
+    tech: ['React', 'Node.js', 'MongoDB', 'Docker', 'GCP', 'REST APIs'],
   },
   {
     id: 4,
     role: 'Software Engineering Intern',
-    company: 'iVue Robotics',
+    company: 'Worlds iVue Robotics',
     period: 'Jan 2024 — Mar 2025',
     location: 'Cumming, GA',
-    description: 'Architected a geofencing engine for autonomous drone navigation and built a high-throughput geospatial pipeline with PostgreSQL/PostGIS for FAA airspace datasets.',
-    tech: ['Vue.js', 'Cesium', 'PostgreSQL', 'PostGIS', 'REST'],
-    highlights: [
-      'Reduced geofence violations by 28% via real-time distributed FAA validation',
-      'Built interactive drone control GUI with real-time flight path visualization',
-      'Optimized spatial indexing for low-latency geofence validation at region scale',
+    hook: 'Full-stack intern building FAA-compliant geofencing and geospatial pipelines for autonomous drone navigation.',
+    context: 'iVue Robotics builds drone prototyping platforms for students and commercial operators. The engineering team ships real-time flight visualization, spatial data services, and regulatory compliance tooling for autonomous aerial systems.',
+    impact: [
+      'Architected a geofencing engine with real-time boundary enforcement, preventing unauthorized airspace entry during autonomous drone missions.',
+      'Built a PostGIS pipeline for region-scale FAA datasets with optimized spatial indexing for low-latency geofence validation.',
+      'Reduced geofence violations by 28% through distributed validation workflows integrating FAA geospatial data into live navigation.',
+      'Developed a Vue/Cesium drone control GUI and REST APIs delivering real-time spatial data to mission planning interfaces.',
     ],
+    challenge: 'Region-scale FAA polygons overlapped inconsistently, producing false geofence triggers at zone boundaries during live flights. Built a preprocessing layer with spatial validation and indexed PostGIS queries so the enforcement engine only blocked genuinely restricted airspace.',
+    tech: ['Vue.js', 'CesiumJS', 'PostgreSQL', 'PostGIS', 'REST', 'Node.js'],
   },
   {
     id: 5,
     role: 'Head of Programming',
-    company: 'AvengerRobotics (FRC Team 7777)',
+    company: 'AvengerRobotics (FIRST)',
     period: 'Jun 2023 — May 2025',
     location: 'Cumming, GA',
-    description: 'Led robot programming using command-based architecture, finite state machines for autonomous sequences, and AprilTag vision with sensor fusion for field localization.',
-    tech: ['Java', 'Odometry', 'AprilTag', 'FSM', 'Path Planning'],
-    highlights: [
-      'Integrated odometry and AprilTag vision for real-time pose estimation',
-      'Developed autonomous path planning with kinematic constraints and motion profiling',
-      'Applied sensor fusion combining encoder, IMU, and vision data for navigation robustness',
+    hook: 'Led a robotics software team building competition autonomous systems for a 3× World Championship qualifier.',
+    context: 'AvengerRobotics is a FIRST Robotics Competition team providing students industrial robot programming experience. As Head of Programming, owned the full software stack for a 120-lb competition robot under strict match-time reliability requirements.',
+    impact: [
+      'Architected modular command-based control software with concurrent subsystem actions, improving code scalability across a multi-developer team.',
+      'Implemented finite state machines for deterministic autonomous sequences, eliminating unpredictable behavior during competition matches.',
+      'Integrated AprilTag vision and odometry for real-time pose estimation, significantly improving autonomous scoring accuracy.',
+      'Built motion-profiled path planning with sensor fusion across encoders, IMU, and vision for robust field navigation.',
     ],
+    challenge: 'Vision-only localization failed under varying field lighting and occlusions. Engineered a sensor fusion pipeline weighting encoder, IMU, and AprilTag inputs with fallback FSM transitions so autonomous routines degraded gracefully instead of halting mid-match.',
+    tech: ['Java', 'WPILib', 'AprilTags', 'Odometry', 'FSM', 'Path Planning'],
   },
   {
     id: 6,
-    role: 'Artificial Intelligence Intern',
+    role: 'AI Intern',
     company: 'Apago, Inc.',
     period: 'Jul 2024 — Jan 2025',
     location: 'Cumming, GA',
-    description: 'Developed real-time computer vision systems using YOLO and OCR for rail detection and license plate tracking, with CUDA-accelerated inference on NVIDIA Jetson.',
-    tech: ['YOLO', 'PaddleOCR', 'CUDA', 'Jetson', 'Python'],
-    highlights: [
-      'Built license plate tracking system for automated vehicle identification',
-      'Designed automated data labeling and preprocessing pipelines',
-      'Deployed edge inference balancing performance, power, and hardware constraints',
+    hook: 'Built edge-deployed computer vision systems for real-time rail detection and license plate tracking on NVIDIA Jetson.',
+    context: 'Apago develops enterprise productivity software and deploys custom computer vision solutions for clients. The AI team ships low-latency detection pipelines on embedded NVIDIA hardware for security and automation use cases.',
+    impact: [
+      'Developed real-time YOLO and OCR vision systems for rail detection and automated text recognition in production environments.',
+      'Built a license plate tracking system for neighborhood security through automated vehicle identification pipelines.',
+      'Deployed CUDA-accelerated inference on NVIDIA Jetson, balancing performance, power efficiency, and hardware constraints.',
+      'Designed automated data labeling and preprocessing pipelines to improve dataset quality and model accuracy.',
     ],
+    challenge: 'YOLO models trained on desktop GPUs missed detections on Jetson due to resolution and quantization differences at the edge. Retrained with Jetson-matched input sizes and built a preprocessing pipeline that normalized camera feeds before inference, recovering detection accuracy without exceeding thermal limits.',
+    tech: ['Python', 'YOLO', 'PaddleOCR', 'CUDA', 'NVIDIA Jetson', 'OpenCV'],
   },
 ];
 
@@ -245,17 +313,17 @@ ${PROFILE.subtitle}
 ${PROFILE.tagline}
 
 ${PROFILE.education}
-Concentration: ${PROFILE.concentration}
-Location: ${PROFILE.location}`,
+Focus: ${PROFILE.focus}
+GPA: 3.88 · ${PROFILE.location}`,
   skills: () => Object.entries(SKILLS)
     .map(([cat, items]) => `[${cat.toUpperCase()}]\n  ${items.join(' · ')}`)
     .join('\n\n'),
   experience: () => EXPERIENCE
-    .map((e) => `▸ ${e.role} @ ${e.company}\n  ${e.period} · ${e.location}\n  ${e.description}`)
+    .map((e) => `▸ ${e.role} @ ${e.company}\n  ${e.period} · ${e.location}\n  ${e.hook}`)
     .join('\n\n'),
   projects: () => PROJECTS
     .filter((p) => p.featured)
-    .map((p) => `◆ ${p.title} [${p.category}]\n  ${p.description}\n  Stack: ${p.tech.join(', ')}`)
+    .map((p) => `◆ ${p.title} [${p.category}]\n  ${p.hook}\n  Stack: ${p.tech.join(', ')}`)
     .join('\n\n'),
   contact: () => `Email:    ${PROFILE.email}
 Phone:    ${PROFILE.phone}
@@ -270,11 +338,11 @@ Location: ${PROFILE.location}`,
      ██║  ██║██║███████║██║  ██║██║
      ╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝╚═╝
 
-  OS: Georgia Tech CS x64
+  OS: Georgia Tech CS x64 · GPA 3.88
   Host: ${PROFILE.name}
-  Kernel: Software Engineer & AI Researcher
-  GPA: 3.88 · Expected Dec 2027
+  Kernel: AI · Systems & Architecture
   Shell: ambition.sh
+  Location: Atlanta, GA
   Terminal: portfolio-v2`,
 };
 
@@ -763,7 +831,7 @@ function BentoMatrix({ visible }) {
                 </div>
               </div>
               <p className="text-sm text-silver-muted leading-relaxed">
-                B.S. Computer Science at Georgia Tech — AI & Systems concentration. Research, full-stack engineering, and robotics.
+                CS @ Georgia Tech (AI · Systems & Architecture). Research, robotics, full-stack, and edge AI — from SLURM clusters to competition fields.
               </p>
             </div>
             <div className="flex gap-2 mt-4">
@@ -803,7 +871,7 @@ function BentoMatrix({ visible }) {
           <GlowCard span="col-span-2 md:col-span-2 row-span-1" className="p-4">
             <p className="text-[10px] text-silver-muted uppercase tracking-wider mb-3">Active Stack</p>
             <div className="flex flex-wrap gap-2">
-              {['React', 'Python', 'TypeScript', 'Java', 'Docker', 'GCP', 'PostgreSQL', 'PyTorch'].map((tech, i) => (
+              {['Python', 'PyTorch', 'React', 'TypeScript', 'PostGIS', 'Docker', 'GCP', 'YOLOv8'].map((tech, i) => (
                 <span
                   key={tech}
                   className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[11px] font-mono text-silver-bright hover:border-gold/30 hover:text-gold-glow transition-all duration-300"
@@ -863,8 +931,8 @@ function BentoMatrix({ visible }) {
               <div className="absolute inset-0 h-3 w-3 rounded-full bg-emerald-400/50 animate-ping" />
             </div>
             <div>
-              <p className="text-sm font-medium text-silver-bright">Open to internships & research</p>
-              <p className="text-[10px] text-silver-muted">SWE · AI/ML · Full-Stack · May 2026 @ ContinuServe</p>
+              <p className="text-sm font-medium text-silver-bright">Open to Summer 2026+ opportunities</p>
+              <p className="text-[10px] text-silver-muted">SWE · AI/ML · Research · Robotics</p>
             </div>
           </GlowCard>
 
@@ -877,8 +945,8 @@ function BentoMatrix({ visible }) {
 
           <GlowCard className="p-4 flex flex-col justify-center items-center">
             <Shield className="h-5 w-5 text-gold mb-2" />
-            <p className="font-display text-xl font-bold text-gold-glow">2027</p>
-            <p className="text-[9px] text-silver-muted uppercase">Grad</p>
+            <p className="font-display text-xl font-bold text-gold-glow">1st</p>
+            <p className="text-[9px] text-silver-muted uppercase">GA FBLA Code</p>
           </GlowCard>
         </div>
       </div>
@@ -954,22 +1022,11 @@ function ProjectShowcase({ visible }) {
                       </div>
                       <div className="flex items-center gap-2">
                         {project.featured && <Star className="h-4 w-4 text-gold fill-gold/30" />}
-                        {project.github && (
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            className="text-silver-muted hover:text-gold transition-colors duration-300"
-                            aria-label={`View ${project.title} on GitHub`}
-                          >
-                            <ExternalLink className="h-4 w-4" />
-                          </a>
-                        )}
+                        <ExternalLink className="h-4 w-4 text-silver-muted opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       </div>
                     </div>
 
-                    <p className="text-sm text-silver-muted leading-relaxed mb-4 flex-1">{project.description}</p>
+                    <p className="text-sm text-silver-bright/90 leading-relaxed mb-4 flex-1 font-medium">{project.hook}</p>
 
                     <div className="flex flex-wrap gap-1.5 mb-4">
                       {project.tech.map((t) => (
@@ -980,15 +1037,48 @@ function ProjectShowcase({ visible }) {
                     </div>
 
                     <div className={`transition-all duration-500 ease-out-expo overflow-hidden ${
-                      isSelected ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                      isSelected ? 'max-h-[700px] opacity-100' : 'max-h-0 opacity-0'
                     }`}>
-                      <div className="grid grid-cols-3 gap-3 pt-3 border-t border-white/10">
-                        {Object.entries(project.metrics).map(([key, val]) => (
-                          <div key={key} className="text-center">
-                            <p className="font-display text-lg font-bold text-gold-glow">{val}</p>
-                            <p className="text-[9px] text-silver-muted uppercase tracking-wider">{key}</p>
-                          </div>
-                        ))}
+                      <div className="pt-3 border-t border-white/10 space-y-4">
+                        <div>
+                          <p className="text-[10px] uppercase tracking-wider text-gold/60 mb-2 font-mono">Context</p>
+                          <p className="text-sm text-silver-muted leading-relaxed">{project.context}</p>
+                        </div>
+                        <div>
+                          <p className="text-[10px] uppercase tracking-wider text-gold/60 mb-2 font-mono">Impact</p>
+                          <ul className="space-y-2">
+                            {project.impact.map((item, j) => (
+                              <li key={j} className="flex items-start gap-2 text-sm text-silver-muted">
+                                <ChevronRight className="h-4 w-4 text-gold/50 shrink-0 mt-0.5" />
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <p className="text-[10px] uppercase tracking-wider text-gold/60 mb-2 font-mono">Engineering Challenge</p>
+                          <p className="text-sm text-silver-muted leading-relaxed">{project.challenge}</p>
+                        </div>
+                        <div className="grid grid-cols-3 gap-3">
+                          {Object.entries(project.metrics).map(([key, val]) => (
+                            <div key={key} className="text-center">
+                              <p className="font-display text-lg font-bold text-gold-glow">{val}</p>
+                              <p className="text-[9px] text-silver-muted uppercase tracking-wider">{key}</p>
+                            </div>
+                          ))}
+                        </div>
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="inline-flex items-center gap-1.5 text-xs text-gold/70 hover:text-gold transition-colors duration-300"
+                          >
+                            <Github className="h-3.5 w-3.5" />
+                            View on GitHub
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -1060,15 +1150,34 @@ function ExperienceTimeline({ visible }) {
                       </div>
                     </div>
 
-                    <p className="mt-3 text-sm text-silver-muted leading-relaxed">{exp.description}</p>
+                    <p className="mt-3 text-sm text-silver-bright/90 leading-relaxed font-medium">{exp.hook}</p>
                   </button>
 
                   <div className={`transition-all duration-500 ease-out-expo overflow-hidden ${
-                    isOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
+                    isOpen ? 'max-h-[800px] opacity-100 mt-4' : 'max-h-0 opacity-0'
                   }`}>
                     <div className="pt-4 border-t border-white/10 space-y-4">
                       <div>
-                        <p className="text-[10px] uppercase tracking-wider text-gold/60 mb-2 font-mono">Tech Spec</p>
+                        <p className="text-[10px] uppercase tracking-wider text-gold/60 mb-2 font-mono">Context</p>
+                        <p className="text-sm text-silver-muted leading-relaxed">{exp.context}</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase tracking-wider text-gold/60 mb-2 font-mono">Impact</p>
+                        <ul className="space-y-2">
+                          {exp.impact.map((item, j) => (
+                            <li key={j} className="flex items-start gap-2 text-sm text-silver-muted">
+                              <ChevronRight className="h-4 w-4 text-gold/50 shrink-0 mt-0.5" />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase tracking-wider text-gold/60 mb-2 font-mono">Engineering Challenge</p>
+                        <p className="text-sm text-silver-muted leading-relaxed">{exp.challenge}</p>
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase tracking-wider text-gold/60 mb-2 font-mono">Tech Stack</p>
                         <div className="flex flex-wrap gap-1.5">
                           {exp.tech.map((t) => (
                             <span key={t} className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-gold/5 border border-gold/15 text-gold-glow">
@@ -1077,17 +1186,6 @@ function ExperienceTimeline({ visible }) {
                           ))}
                         </div>
                       </div>
-                      <div>
-                        <p className="text-[10px] uppercase tracking-wider text-gold/60 mb-2 font-mono">Highlights</p>
-                        <ul className="space-y-2">
-                          {exp.highlights.map((h, j) => (
-                            <li key={j} className="flex items-start gap-2 text-sm text-silver-muted">
-                              <ChevronRight className="h-4 w-4 text-gold/50 shrink-0 mt-0.5" />
-                              {h}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
                     </div>
                   </div>
 
@@ -1095,7 +1193,7 @@ function ExperienceTimeline({ visible }) {
                     onClick={() => setExpanded(isOpen ? null : exp.id)}
                     className="mt-3 flex items-center gap-1 text-[11px] text-gold/60 hover:text-gold transition-colors duration-300"
                   >
-                    {isOpen ? 'Collapse' : 'Expand tech spec'}
+                    {isOpen ? 'Collapse' : 'Expand details'}
                     <ChevronDown className={`h-3 w-3 transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}`} />
                   </button>
                 </GlowCard>
@@ -1190,19 +1288,18 @@ function TerminalIDE({ visible }) {
 export const engineer = {
   name: "${PROFILE.name}",
   school: "Georgia Tech",
-  major: "Computer Science (AI & Systems)",
+  major: "Computer Science (AI · Systems)",
   gpa: 3.88,
-  graduation: "Dec 2027",
-  email: "${PROFILE.email}",
-  passions: [
-    "evolutionary ML & NAS",
+  grad: "Dec 2027",
+  focus: [
+    "automated algorithm design",
     "computer vision & edge AI",
-    "full-stack & cloud infra",
+    "autonomous robotics",
+    "full-stack systems",
   ],
-  seeking: "SWE & AI internships",
 };
 
-console.log("Let's build something extraordinary.");`;
+console.log("Building at the frontier.");`;
 
   return (
     <section id="terminal" className="relative py-32 px-6">
@@ -1259,7 +1356,7 @@ console.log("Let's build something extraordinary.");`;
             <div className="hidden lg:block lg:col-span-1 bg-white/[0.02] border-r border-white/10 p-4">
               <p className="text-[10px] uppercase tracking-wider text-silver-muted mb-3 font-mono">Explorer</p>
               <div className="space-y-1 font-mono text-[11px]">
-                {['portfolio.config.ts', 'resume.json', 'skills.yaml', 'projects/'].map((file, i) => (
+                {['portfolio.config.ts', 'VIP/nas_pipeline.py', 'skills.yaml', 'projects/'].map((file, i) => (
                   <div
                     key={file}
                     className={`flex items-center gap-2 px-2 py-1.5 rounded-md transition-all duration-300 ${
@@ -1362,7 +1459,7 @@ function Footer() {
           </div>
           <div>
             <p className="font-display font-bold text-silver-bright">{PROFILE.name}</p>
-            <p className="text-xs text-silver-muted">{PROFILE.subtitle}</p>
+            <p className="text-xs text-silver-muted">{PROFILE.education}</p>
           </div>
         </div>
 
