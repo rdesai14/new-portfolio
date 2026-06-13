@@ -34,141 +34,190 @@ import {
 
 const PROFILE = {
   name: 'Rishi Desai',
-  title: 'Creative Technologist',
-  subtitle: 'Computer Science @ Georgia Tech',
-  email: 'rishi.desai@gatech.edu',
+  title: 'Software Engineer & AI Researcher',
+  subtitle: 'B.S. Computer Science @ Georgia Tech · GPA 3.88',
+  email: 'rdesai317@gatech.edu',
+  phone: '(470) 881-0768',
+  location: 'Atlanta, GA',
   github: 'https://github.com/rdesai14',
-  linkedin: 'https://linkedin.com/in/rishidesai',
-  tagline: 'Engineering immersive interfaces at the intersection of systems, AI, and human experience.',
+  linkedin: 'https://www.linkedin.com/in/rishi-desai-16964a290/',
+  tagline: 'Researching evolutionary neural architecture search on HPC clusters while building full-stack platforms, computer vision pipelines, and cloud infrastructure.',
+  education: 'Georgia Institute of Technology · Expected Dec 2027',
+  concentration: 'Artificial Intelligence · Systems & Architecture',
 };
 
 const SPECIALIZATIONS = [
-  'Full-Stack Systems Architect',
-  'Machine Learning Engineer',
-  'Distributed Systems Builder',
-  'Creative Frontend Engineer',
-  'Cloud Infrastructure Designer',
-  'Real-Time Data Pipelines',
+  'Automated Algorithm Design Researcher',
+  'Full-Stack Software Engineer',
+  'Computer Vision & Edge AI Engineer',
+  'Cloud Infrastructure Architect',
+  'Distributed Geospatial Systems Builder',
+  'Evolutionary ML Pipeline Engineer',
 ];
 
 const SKILLS = {
-  languages: ['TypeScript', 'Python', 'Rust', 'Go', 'C++', 'SQL'],
-  frontend: ['React', 'Next.js', 'Three.js', 'WebGL', 'Tailwind', 'Framer Motion'],
-  backend: ['Node.js', 'FastAPI', 'PostgreSQL', 'Redis', 'GraphQL', 'gRPC'],
-  infra: ['AWS', 'Docker', 'Kubernetes', 'Terraform', 'CI/CD', 'Linux'],
-  ml: ['PyTorch', 'TensorFlow', 'scikit-learn', 'CUDA', 'LangChain', 'OpenCV'],
+  languages: ['Python', 'Java', 'C++', 'JavaScript', 'TypeScript', 'C', 'SQL', 'Assembly'],
+  frontend: ['React', 'Vue.js', 'Vite', 'Node.js', 'Bootstrap', 'MVVM'],
+  cloud: ['Google Cloud', 'AWS EC2', 'IAM', 'S3', 'Firebase', 'Docker', 'CI/CD'],
+  data: ['PostgreSQL', 'MongoDB', 'PostGIS', 'Git', 'Bash', 'Linux', 'ETL'],
+  ml: ['PyTorch', 'Scikit-Learn', 'YOLOv8', 'PaddleOCR', 'DEAP', 'CUDA', 'LLMs'],
 };
 
 const METRICS = [
-  { label: 'GitHub Stars', value: '240+', icon: Star },
-  { label: 'Repositories', value: '32', icon: FolderGit2 },
-  { label: 'Contributions', value: '1.2k', icon: GitBranch },
-  { label: 'Languages', value: '12', icon: Code2 },
+  { label: 'GPA', value: '3.88', icon: Star },
+  { label: 'Repositories', value: '18', icon: FolderGit2 },
+  { label: 'Contributions', value: '83+', icon: GitBranch },
+  { label: 'Languages', value: '8', icon: Code2 },
 ];
 
 const PROJECTS = [
   {
     id: 1,
-    title: 'NeuralCanvas',
+    title: 'Evolutionary NAS Pipeline',
     category: 'ai',
-    description: 'Real-time collaborative ML model visualization platform with WebGL-accelerated tensor rendering and live inference dashboards.',
-    tech: ['React', 'WebGL', 'Python', 'FastAPI', 'Redis'],
-    metrics: { latency: '12ms', users: '2.4k', accuracy: '97.3%' },
+    description: 'Distributed neural architecture search on a 500+ node HPC cluster, parallelizing SLURM jobs to evolve YOLOv3 variants on COCO 2017. Patched genetic algorithm diversity bugs and extended GitHub Actions CI to validate evolutionary runs.',
+    tech: ['Python', 'PyTorch', 'SLURM', 'YOLO', 'DEAP', 'GitHub Actions'],
+    metrics: { speedup: '50%', mAP: '0.377–0.433', cluster: '500+ nodes' },
     color: 'from-purple-500/20 to-blue-500/20',
     featured: true,
+    github: 'https://github.com/rdesai14/VIP',
   },
   {
     id: 2,
-    title: 'DistributedKV',
+    title: 'iVue Geofencing Engine',
     category: 'systems',
-    description: 'Fault-tolerant distributed key-value store with Raft consensus, built from scratch in Rust with sub-millisecond read latency.',
-    tech: ['Rust', 'Tokio', 'gRPC', 'Docker'],
-    metrics: { throughput: '850k ops/s', nodes: '12', uptime: '99.99%' },
+    description: 'Geofencing engine for autonomous drone navigation with PostgreSQL/PostGIS pipelines managing region-scale FAA airspace datasets. Real-time distributed validation reduced geofence violations by 28%.',
+    tech: ['PostgreSQL', 'PostGIS', 'Vue.js', 'REST', 'Cesium'],
+    metrics: { violations: '-28%', scale: 'Region-scale', latency: 'Real-time' },
     color: 'from-orange-500/20 to-red-500/20',
     featured: true,
+    github: 'https://github.com/rdesai14/iVue-Data-Storage',
   },
   {
     id: 3,
-    title: 'CampusFlow',
+    title: 'HexLabs Cloud Platform',
     category: 'fullstack',
-    description: 'Campus resource orchestration platform serving 50k+ Georgia Tech students with real-time room booking and event coordination.',
-    tech: ['Next.js', 'PostgreSQL', 'WebSockets', 'AWS'],
-    metrics: { users: '50k+', requests: '2M/mo', rating: '4.9★' },
+    description: 'Managed GCP infrastructure cutting monthly spend by 50%, deployed MongoDB-backed REST APIs in Docker, and built hackathon judging software with React for real-time submission tracking.',
+    tech: ['React', 'MongoDB', 'Docker', 'GCP', 'REST'],
+    metrics: { cost: '-50%', issues: '-40%', apis: 'REST' },
     color: 'from-emerald-500/20 to-teal-500/20',
     featured: true,
+    github: 'https://github.com/rdesai14/HexLabs',
   },
   {
     id: 4,
-    title: 'VisionGuard',
+    title: 'F1 Lap Time Prediction',
     category: 'ai',
-    description: 'Edge-deployed computer vision pipeline for real-time anomaly detection with ONNX-optimized inference on embedded hardware.',
-    tech: ['Python', 'OpenCV', 'ONNX', 'CUDA'],
-    metrics: { fps: '60', precision: '94.7%', devices: '200+' },
+    description: 'ML pipeline predicting Formula 1 lap times across 5+ seasons of telemetry. Feature engineering and ensemble modeling in Scikit-Learn with automated ETL eliminating 80% of manual preprocessing.',
+    tech: ['Scikit-Learn', 'React', 'Pandas', 'NumPy', 'ETL'],
+    metrics: { accuracy: '+20%', error: '-15%', etl: '80% automated' },
     color: 'from-cyan-500/20 to-indigo-500/20',
     featured: false,
+    github: 'https://github.com/rdesai14/F1_HungarianGrandPrixQualifying',
   },
   {
     id: 5,
-    title: 'PulseAPI',
-    category: 'backend',
-    description: 'High-throughput event streaming API with automatic schema evolution, dead-letter queues, and observability baked in.',
-    tech: ['Go', 'Kafka', 'PostgreSQL', 'Prometheus'],
-    metrics: { events: '10M/day', p99: '8ms', consumers: '45' },
+    title: 'Apago Vision Systems',
+    category: 'ai',
+    description: 'Real-time computer vision with YOLO and OCR for rail detection and license plate tracking. CUDA-accelerated inference deployed on NVIDIA Jetson for low-latency edge detection.',
+    tech: ['YOLO', 'PaddleOCR', 'CUDA', 'Jetson', 'Python'],
+    metrics: { deployment: 'Edge', inference: 'Real-time', domain: 'CV + OCR' },
     color: 'from-amber-500/20 to-yellow-500/20',
     featured: false,
   },
   {
     id: 6,
-    title: 'AetherUI',
-    category: 'frontend',
-    description: 'Design system and component library with physics-based animations, accessibility-first primitives, and dark-mode theming engine.',
-    tech: ['React', 'TypeScript', 'Storybook', 'Tailwind'],
-    metrics: { components: '80+', downloads: '15k', a11y: 'WCAG AA' },
+    title: 'AvengerRobotics FRC',
+    category: 'systems',
+    description: 'Head of Programming for FIRST Robotics Team 7777. Command-based robot control, finite state machines for autonomous sequences, and AprilTag vision with sensor fusion for pose estimation.',
+    tech: ['Java', 'Odometry', 'AprilTag', 'FSM', 'Path Planning'],
+    metrics: { role: 'Head of Prog.', team: 'FRC 7777', seasons: '2023–2025' },
     color: 'from-pink-500/20 to-rose-500/20',
     featured: false,
+    github: 'https://github.com/rdesai14/FRC2024',
   },
 ];
 
 const EXPERIENCE = [
   {
     id: 1,
-    role: 'Software Engineering Intern',
-    company: 'Microsoft',
-    period: 'May 2025 — Aug 2025',
-    location: 'Redmond, WA',
-    description: 'Built scalable microservices on Azure handling 500M+ daily requests. Optimized CI/CD pipelines reducing deployment time by 60%.',
-    tech: ['C#', '.NET', 'Azure', 'Kubernetes', 'TypeScript'],
-    highlights: ['Led migration of legacy auth service to OAuth 2.0', 'Reduced P99 latency by 40% through query optimization'],
+    role: 'Incoming Software Engineering & AI Solutions Intern',
+    company: 'Quatrro / ContinuServe',
+    period: 'May 2026 — Present',
+    location: 'Marietta, GA',
+    description: 'Incoming intern focused on software engineering and AI solutions at Quatrro Business Support Solutions.',
+    tech: ['Python', 'AI/ML', 'Software Engineering'],
+    highlights: ['Joining May 2026 to build production AI solutions'],
   },
   {
     id: 2,
-    role: 'Research Assistant',
-    company: 'Georgia Tech — ML Lab',
-    period: 'Jan 2025 — Present',
+    role: 'Undergraduate Researcher — Automated Algorithm Design Lab',
+    company: 'Georgia Tech VIP Program',
+    period: 'Dec 2025 — Present',
     location: 'Atlanta, GA',
-    description: 'Researching efficient transformer architectures for edge deployment. Published findings on model distillation techniques.',
-    tech: ['PyTorch', 'Python', 'CUDA', 'Weights & Biases'],
-    highlights: ['Co-authored paper on edge-optimized attention mechanisms', 'Achieved 4x inference speedup with minimal accuracy loss'],
+    description: 'Built and deployed a distributed neural architecture search pipeline on a 500+ node HPC cluster, parallelizing SLURM jobs to evaluate evolved YOLOv3 variants on 118K-image COCO 2017.',
+    tech: ['Python', 'PyTorch', 'SLURM', 'DEAP', 'YOLO', 'GitHub Actions'],
+    highlights: [
+      'Cut per-generation wall time by ~50% through hyperparameter tuning while preserving mAP50-95 of 0.377–0.433',
+      'Patched population diversity bug in genetic algorithm that was cloning parent architectures',
+      'Extended GitHub Actions CI/CD to parse output files and classify architectures as pass/fail',
+    ],
   },
   {
     id: 3,
-    role: 'Full-Stack Developer',
-    company: 'GT Startup Launchpad',
-    period: 'Aug 2024 — Dec 2024',
+    role: 'Software Engineer',
+    company: 'HexLabs Inc.',
+    period: 'Dec 2025 — Present',
     location: 'Atlanta, GA',
-    description: 'Architected and shipped MVP for campus marketplace startup. Managed team of 4 engineers through product-market fit iteration.',
-    tech: ['Next.js', 'PostgreSQL', 'Stripe', 'Vercel'],
-    highlights: ['Grew user base to 3,000+ in first semester', 'Implemented real-time chat with WebSocket architecture'],
+    description: 'Managed GCP cloud infrastructure, built API-driven MongoDB applications in Docker, and developed hackathon judging software with React for automated submission tracking.',
+    tech: ['React', 'MongoDB', 'Docker', 'GCP', 'REST', 'CI/CD'],
+    highlights: [
+      'Reduced monthly cloud spending by 50% while maintaining high availability',
+      'Cut recurring issues by 40% through logging, monitoring, and automated testing',
+      'Built REST APIs enabling reliable, scalable data exchange across services',
+    ],
   },
   {
     id: 4,
-    role: 'Teaching Assistant',
-    company: 'Georgia Tech — CS 2110',
-    period: 'Aug 2024 — Present',
-    location: 'Atlanta, GA',
-    description: 'Mentoring 200+ students in computer organization, assembly programming, and digital logic design.',
-    tech: ['C', 'LC-3 Assembly', 'Digital Logic'],
-    highlights: ['Maintained 4.9/5.0 student evaluation rating', 'Developed interactive visualization tools for instruction'],
+    role: 'Software Engineering Intern',
+    company: 'iVue Robotics',
+    period: 'Jan 2024 — Mar 2025',
+    location: 'Cumming, GA',
+    description: 'Architected a geofencing engine for autonomous drone navigation and built a high-throughput geospatial pipeline with PostgreSQL/PostGIS for FAA airspace datasets.',
+    tech: ['Vue.js', 'Cesium', 'PostgreSQL', 'PostGIS', 'REST'],
+    highlights: [
+      'Reduced geofence violations by 28% via real-time distributed FAA validation',
+      'Built interactive drone control GUI with real-time flight path visualization',
+      'Optimized spatial indexing for low-latency geofence validation at region scale',
+    ],
+  },
+  {
+    id: 5,
+    role: 'Head of Programming',
+    company: 'AvengerRobotics (FRC Team 7777)',
+    period: 'Jun 2023 — May 2025',
+    location: 'Cumming, GA',
+    description: 'Led robot programming using command-based architecture, finite state machines for autonomous sequences, and AprilTag vision with sensor fusion for field localization.',
+    tech: ['Java', 'Odometry', 'AprilTag', 'FSM', 'Path Planning'],
+    highlights: [
+      'Integrated odometry and AprilTag vision for real-time pose estimation',
+      'Developed autonomous path planning with kinematic constraints and motion profiling',
+      'Applied sensor fusion combining encoder, IMU, and vision data for navigation robustness',
+    ],
+  },
+  {
+    id: 6,
+    role: 'Artificial Intelligence Intern',
+    company: 'Apago, Inc.',
+    period: 'Jul 2024 — Jan 2025',
+    location: 'Cumming, GA',
+    description: 'Developed real-time computer vision systems using YOLO and OCR for rail detection and license plate tracking, with CUDA-accelerated inference on NVIDIA Jetson.',
+    tech: ['YOLO', 'PaddleOCR', 'CUDA', 'Jetson', 'Python'],
+    highlights: [
+      'Built license plate tracking system for automated vehicle identification',
+      'Designed automated data labeling and preprocessing pipelines',
+      'Deployed edge inference balancing performance, power, and hardware constraints',
+    ],
   },
 ];
 
@@ -195,8 +244,9 @@ const TERMINAL_COMMANDS = {
 ${PROFILE.subtitle}
 ${PROFILE.tagline}
 
-Currently pursuing B.S. in Computer Science at Georgia Institute of Technology.
-Focus areas: distributed systems, machine learning, and creative engineering.`,
+${PROFILE.education}
+Concentration: ${PROFILE.concentration}
+Location: ${PROFILE.location}`,
   skills: () => Object.entries(SKILLS)
     .map(([cat, items]) => `[${cat.toUpperCase()}]\n  ${items.join(' · ')}`)
     .join('\n\n'),
@@ -208,8 +258,10 @@ Focus areas: distributed systems, machine learning, and creative engineering.`,
     .map((p) => `◆ ${p.title} [${p.category}]\n  ${p.description}\n  Stack: ${p.tech.join(', ')}`)
     .join('\n\n'),
   contact: () => `Email:    ${PROFILE.email}
+Phone:    ${PROFILE.phone}
 GitHub:   ${PROFILE.github}
-LinkedIn: ${PROFILE.linkedin}`,
+LinkedIn: ${PROFILE.linkedin}
+Location: ${PROFILE.location}`,
   whoami: () => PROFILE.name,
   neofetch: () => `     ██████╗ ██╗███████╗██╗  ██╗██╗
      ██╔══██╗██║██╔════╝██║  ██║██║
@@ -220,8 +272,8 @@ LinkedIn: ${PROFILE.linkedin}`,
 
   OS: Georgia Tech CS x64
   Host: ${PROFILE.name}
-  Kernel: Creative Technologist 1.0
-  Uptime: Always building
+  Kernel: Software Engineer & AI Researcher
+  GPA: 3.88 · Expected Dec 2027
   Shell: ambition.sh
   Terminal: portfolio-v2`,
 };
@@ -711,7 +763,7 @@ function BentoMatrix({ visible }) {
                 </div>
               </div>
               <p className="text-sm text-silver-muted leading-relaxed">
-                Building at the frontier of software engineering — from low-level systems to pixel-perfect interfaces.
+                B.S. Computer Science at Georgia Tech — AI & Systems concentration. Research, full-stack engineering, and robotics.
               </p>
             </div>
             <div className="flex gap-2 mt-4">
@@ -751,7 +803,7 @@ function BentoMatrix({ visible }) {
           <GlowCard span="col-span-2 md:col-span-2 row-span-1" className="p-4">
             <p className="text-[10px] text-silver-muted uppercase tracking-wider mb-3">Active Stack</p>
             <div className="flex flex-wrap gap-2">
-              {['React', 'TypeScript', 'Python', 'Rust', 'AWS', 'PyTorch', 'Docker', 'PostgreSQL'].map((tech, i) => (
+              {['React', 'Python', 'TypeScript', 'Java', 'Docker', 'GCP', 'PostgreSQL', 'PyTorch'].map((tech, i) => (
                 <span
                   key={tech}
                   className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-[11px] font-mono text-silver-bright hover:border-gold/30 hover:text-gold-glow transition-all duration-300"
@@ -811,22 +863,22 @@ function BentoMatrix({ visible }) {
               <div className="absolute inset-0 h-3 w-3 rounded-full bg-emerald-400/50 animate-ping" />
             </div>
             <div>
-              <p className="text-sm font-medium text-silver-bright">Available for opportunities</p>
-              <p className="text-[10px] text-silver-muted">Internships · Research · Collaborations</p>
+              <p className="text-sm font-medium text-silver-bright">Open to internships & research</p>
+              <p className="text-[10px] text-silver-muted">SWE · AI/ML · Full-Stack · May 2026 @ ContinuServe</p>
             </div>
           </GlowCard>
 
           {/* Performance Card */}
           <GlowCard className="p-4 flex flex-col justify-center items-center">
             <Zap className="h-5 w-5 text-gold mb-2" />
-            <p className="font-display text-xl font-bold text-gold-glow">99.9%</p>
-            <p className="text-[9px] text-silver-muted uppercase">Uptime</p>
+            <p className="font-display text-xl font-bold text-gold-glow">3.88</p>
+            <p className="text-[9px] text-silver-muted uppercase">GPA</p>
           </GlowCard>
 
           <GlowCard className="p-4 flex flex-col justify-center items-center">
             <Shield className="h-5 w-5 text-gold mb-2" />
-            <p className="font-display text-xl font-bold text-gold-glow">A+</p>
-            <p className="text-[9px] text-silver-muted uppercase">Security</p>
+            <p className="font-display text-xl font-bold text-gold-glow">2027</p>
+            <p className="text-[9px] text-silver-muted uppercase">Grad</p>
           </GlowCard>
         </div>
       </div>
@@ -902,7 +954,18 @@ function ProjectShowcase({ visible }) {
                       </div>
                       <div className="flex items-center gap-2">
                         {project.featured && <Star className="h-4 w-4 text-gold fill-gold/30" />}
-                        <ExternalLink className="h-4 w-4 text-silver-muted opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="text-silver-muted hover:text-gold transition-colors duration-300"
+                            aria-label={`View ${project.title} on GitHub`}
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                          </a>
+                        )}
                       </div>
                     </div>
 
@@ -1127,13 +1190,16 @@ function TerminalIDE({ visible }) {
 export const engineer = {
   name: "${PROFILE.name}",
   school: "Georgia Tech",
-  major: "Computer Science",
+  major: "Computer Science (AI & Systems)",
+  gpa: 3.88,
+  graduation: "Dec 2027",
+  email: "${PROFILE.email}",
   passions: [
-    "distributed systems",
-    "machine learning",
-    "creative engineering",
+    "evolutionary ML & NAS",
+    "computer vision & edge AI",
+    "full-stack & cloud infra",
   ],
-  seeking: "impactful opportunities",
+  seeking: "SWE & AI internships",
 };
 
 console.log("Let's build something extraordinary.");`;
