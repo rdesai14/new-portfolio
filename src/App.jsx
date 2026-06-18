@@ -818,6 +818,19 @@ function HeroSection({ visible }) {
           visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
         }`}
       >
+        {/* Profile photo — drop your image at public/profile.jpg to activate */}
+        <div className="mb-8 flex justify-center animate-fade-in">
+          <div className="relative h-32 w-32 sm:h-40 sm:w-40">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gold/40 to-navy-light/60 blur-md" />
+            <img
+              src="/profile.jpg"
+              alt="Rishi Desai"
+              className="relative h-full w-full rounded-full object-cover border-2 border-gold/30 shadow-lg shadow-black/40"
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            />
+          </div>
+        </div>
+
         <div className="mb-6 inline-flex items-center gap-2 rounded-full glass-gold px-4 py-1.5 text-xs font-medium text-gold-glow animate-fade-in">
           <Sparkles className="h-3.5 w-3.5" />
           {PROFILE.subtitle}
