@@ -823,7 +823,7 @@ function HeroSection({ visible }) {
           <div className="relative h-32 w-32 sm:h-40 sm:w-40">
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gold/40 to-navy-light/60 blur-md" />
             <img
-              src="/profile.jpg"
+              src={`${import.meta.env.BASE_URL}profile.jpg`}
               alt="Rishi Desai"
               className="relative h-full w-full rounded-full object-cover border-2 border-gold/30 shadow-lg shadow-black/40"
               onError={(e) => { e.currentTarget.style.display = 'none'; }}
