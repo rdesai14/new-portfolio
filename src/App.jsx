@@ -818,17 +818,13 @@ function HeroSection({ visible }) {
           visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
         }`}
       >
-        {/* Profile photo — drop your image at public/profile.jpg to activate */}
+        {/* Profile photo */}
         <div className="mb-8 flex justify-center animate-fade-in">
-          <div className="relative h-32 w-32 sm:h-40 sm:w-40">
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gold/40 to-navy-light/60 blur-md" />
-            <img
-              src={`${import.meta.env.BASE_URL}profile.jpg`}
-              alt="Rishi Desai"
-              className="relative h-full w-full rounded-full object-cover border-2 border-gold/30 shadow-lg shadow-black/40"
-              onError={(e) => { e.currentTarget.style.display = 'none'; }}
-            />
-          </div>
+          <img
+            src={`${import.meta.env.BASE_URL}profile.jpg`}
+            alt="Rishi Desai"
+            className="h-32 w-32 sm:h-40 sm:w-40 rounded-full object-cover object-top border-2 border-gold/40 shadow-lg shadow-black/40"
+          />
         </div>
 
         <div className="mb-6 inline-flex items-center gap-2 rounded-full glass-gold px-4 py-1.5 text-xs font-medium text-gold-glow animate-fade-in">
